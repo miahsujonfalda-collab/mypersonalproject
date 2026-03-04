@@ -10,9 +10,9 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
     <style>
         :root {
-            --primary-red: #FF3B30;
-            --red-glow: rgba(255, 59, 48, 0.5);
-            --red-deep: #D32F2F;
+            --primary-color: #00D4FF;
+            --primary-glow: rgba(0, 212, 255, 0.5);
+            --primary-deep: #00A8CC;
             --white: #FFFFFF;
             --bg-soft: #0A0A0F;
             --bg-card: rgba(255,255,255,0.04);
@@ -49,7 +49,7 @@
 
         .header-live-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(255,59,48,0.12) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(0,212,255,0.12) 0%, transparent 100%);
             z-index: 0;
         }
 
@@ -57,8 +57,8 @@
             content: '';
             position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(255,59,48,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(255,59,48,0.06) 0%, transparent 50%);
+            background: radial-gradient(circle at 30% 40%, rgba(0,212,255,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(0,212,255,0.06) 0%, transparent 50%);
             animation: headerPulse 8s ease-in-out infinite;
         }
 
@@ -89,7 +89,7 @@
             position: absolute; top: -3px; left: -3px;
             width: calc(100% + 6px); height: calc(100% + 6px);
             border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--primary-red), #FF6B6B, #FF3B30, #FF9500, var(--primary-red));
+            background: conic-gradient(from 0deg, var(--primary-color), #7AFFFF, #00D4FF, #00FFAA, var(--primary-color));
             -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
             mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
             animation: profileRingSpin 3s linear infinite;
@@ -103,7 +103,7 @@
             position: absolute; top: -20px; left: -20px;
             width: calc(100% + 40px); height: calc(100% + 40px);
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,59,48,0.3) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0,212,255,0.3) 0%, transparent 70%);
             animation: profileGlowPulse 2s ease-in-out infinite;
             z-index: -1;
         }
@@ -171,7 +171,7 @@
             letter-spacing: 2px;
             display: inline-flex;
             align-items: center; gap: 8px;
-            text-shadow: 0 0 30px rgba(255,59,48,0.3);
+            text-shadow: 0 0 30px rgba(0,212,255,0.3);
         }
 
         .name-container h1 .inline-badge {
@@ -193,7 +193,7 @@
         }
 
         .tagline {
-            color: var(--primary-red);
+            color: var(--primary-color);
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 3px;
@@ -207,7 +207,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== SOCIAL BUTTONS (TELEGRAM + DEVELOPER) ========== */
+        /* ========== SOCIAL BUTTONS ========== */
         .social-buttons {
             display: flex; gap: 12px;
             justify-content: center;
@@ -242,14 +242,14 @@
         }
 
         .social-btn-telegram {
-            background: linear-gradient(135deg, #FF3B30, #FF6B6B);
+            background: linear-gradient(135deg, var(--primary-color), #7AFFFF);
             color: white;
-            box-shadow: 0 4px 20px rgba(255,59,48,0.4);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.4);
         }
 
         .social-btn-telegram:active {
             transform: scale(0.95);
-            box-shadow: 0 2px 10px rgba(255,59,48,0.6);
+            box-shadow: 0 2px 10px rgba(0,212,255,0.6);
         }
 
         .social-btn-dev {
@@ -282,8 +282,8 @@
         .stat-number {
             font-family: 'Orbitron', sans-serif;
             font-size: 22px; font-weight: 900;
-            color: var(--primary-red);
-            text-shadow: 0 0 20px rgba(255,59,48,0.3);
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(0,212,255,0.3);
         }
 
         .stat-label {
@@ -312,10 +312,10 @@
             content: '';
             display: block;
             width: 40px; height: 3px;
-            background: var(--primary-red);
+            background: var(--primary-color);
             margin: 8px auto 0;
             border-radius: 2px;
-            box-shadow: 0 0 10px var(--red-glow);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         /* ========== CONTAINER ========== */
@@ -348,7 +348,7 @@
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
             border-radius: 22px;
-            background: conic-gradient(from var(--card-angle, 0deg), var(--primary-red), #FF6B6B, transparent, transparent, transparent, var(--primary-red));
+            background: conic-gradient(from var(--card-angle, 0deg), var(--primary-color), #7AFFFF, transparent, transparent, transparent, var(--primary-color));
             animation: cardBorderRoll 4s linear infinite;
             opacity: 0.5;
             transition: opacity 0.3s ease;
@@ -385,7 +385,7 @@
             content: '';
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(255,59,48,0.06) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 70%);
             transition: opacity 0.3s;
         }
 
@@ -418,8 +418,8 @@
         .icon-box {
             width: 70px; height: 70px;
             margin: 0 auto 12px;
-            background: rgba(255,59,48,0.08);
-            border: 1px solid rgba(255,59,48,0.15);
+            background: rgba(0,212,255,0.08);
+            border: 1px solid rgba(0,212,255,0.15);
             border-radius: 50%;
             display: flex;
             align-items: center; justify-content: center;
@@ -431,10 +431,10 @@
 
         .card:active .icon-box {
             transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(255,59,48,0.3);
+            box-shadow: 0 0 25px rgba(0,212,255,0.3);
         }
 
-        .icon-box i { font-size: 28px; color: var(--primary-red); }
+        .icon-box i { font-size: 28px; color: var(--primary-color); }
         .icon-box img { width: 60%; height: 60%; object-fit: contain; }
 
         .card h3 {
@@ -480,7 +480,7 @@
         }
 
         .footer-banner .heart {
-            color: var(--primary-red);
+            color: var(--primary-color);
             animation: heartBeat 1.5s ease-in-out infinite;
             display: inline-block;
         }
@@ -512,7 +512,7 @@
         .marquee-content span {
             font-family: 'Orbitron', sans-serif;
             font-size: 11px;
-            color: rgba(255,59,48,0.4);
+            color: rgba(0,212,255,0.4);
             letter-spacing: 3px;
             text-transform: uppercase;
             white-space: nowrap;
@@ -542,10 +542,10 @@
 
         .modal-content {
             background: linear-gradient(145deg, #1A1A2E, #16162A);
-            border: 1px solid rgba(255,59,48,0.2);
+            border: 1px solid rgba(0,212,255,0.2);
             padding: 30px 20px; border-radius: 24px;
             width: 85%; max-width: 340px; text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,59,48,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.1);
             animation: modalContentSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -554,7 +554,7 @@
         .modal-content::before {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(255,59,48,0.06) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 60%);
             pointer-events: none;
         }
 
@@ -595,9 +595,9 @@
         }
 
         .btn-start {
-            background: linear-gradient(135deg, var(--primary-red), #FF6B6B);
+            background: linear-gradient(135deg, var(--primary-color), #7AFFFF);
             color: white;
-            box-shadow: 0 4px 20px rgba(255,59,48,0.4);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.4);
         }
 
         .btn-start::before {
@@ -624,11 +624,11 @@
 
         .viewer-header {
             padding: 15px 20px;
-            background: linear-gradient(135deg, var(--primary-red), #D32F2F);
+            background: linear-gradient(135deg, var(--primary-color), #00A8CC);
             color: white;
             display: flex; align-items: center; gap: 12px;
             font-weight: 600; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255,59,48,0.3);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.3);
         }
 
         .viewer-header:active { opacity: 0.85; }
@@ -639,10 +639,10 @@
         #admin-access-btn {
             position: fixed; bottom: 20px; right: 20px;
             background: linear-gradient(135deg, #1A1A2E, #2A2A4A);
-            color: white; border: 1px solid rgba(255,59,48,0.3);
+            color: white; border: 1px solid rgba(0,212,255,0.3);
             padding: 12px 22px; border-radius: 50px;
             font-weight: 600; cursor: pointer; z-index: 2000;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.4), 0 0 15px rgba(255,59,48,0.15);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.4), 0 0 15px rgba(0,212,255,0.15);
             display: flex; align-items: center; gap: 8px;
             transition: all 0.3s ease;
             font-size: 13px;
@@ -655,7 +655,7 @@
         }
 
         #admin-access-btn:active { transform: scale(0.95); }
-        #admin-access-btn i { color: var(--primary-red); }
+        #admin-access-btn i { color: var(--primary-color); }
 
         /* ========== ADMIN PANEL ========== */
         .admin-form-group { margin-bottom: 14px; text-align: left; position: relative; z-index: 1; }
@@ -680,17 +680,17 @@
 
         .admin-form-group input::placeholder { color: rgba(255,255,255,0.25); }
         .admin-form-group input:focus {
-            border-color: var(--primary-red);
-            box-shadow: 0 0 15px rgba(255,59,48,0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0,212,255,0.15);
         }
 
         .btn-admin-submit {
-            background: linear-gradient(135deg, var(--primary-red), #FF6B6B);
+            background: linear-gradient(135deg, var(--primary-color), #7AFFFF);
             color: white; border: none;
             padding: 13px; width: 100%; border-radius: 12px;
             font-weight: 700; cursor: pointer; font-size: 14px;
             margin-top: 10px;
-            box-shadow: 0 4px 20px rgba(255,59,48,0.3);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.3);
             transition: all 0.3s ease;
             position: relative; z-index: 1;
         }
@@ -701,7 +701,7 @@
             margin-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.08);
             padding-top: 15px;
-            max-height: 250px;
+            max-height: 280px;
             overflow-y: auto;
             text-align: left;
             position: relative; z-index: 1;
@@ -709,7 +709,7 @@
 
         .project-list-admin::-webkit-scrollbar { width: 4px; }
         .project-list-admin::-webkit-scrollbar-track { background: transparent; }
-        .project-list-admin::-webkit-scrollbar-thumb { background: rgba(255,59,48,0.3); border-radius: 4px; }
+        .project-list-admin::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); border-radius: 4px; }
 
         .admin-proj-item {
             display: flex; justify-content: space-between; align-items: center;
@@ -732,7 +732,7 @@
 
         .admin-proj-actions button:active { transform: scale(0.9); }
         .btn-edit { background: linear-gradient(135deg, #007AFF, #34AADC); }
-        .btn-delete { background: linear-gradient(135deg, var(--primary-red), #FF6B6B); }
+        .btn-delete { background: linear-gradient(135deg, var(--primary-color), #7AFFFF); }
 
         .admin-close-btn {
             position: absolute; right: 18px; top: 18px;
@@ -747,7 +747,7 @@
             z-index: 5;
         }
 
-        .admin-close-btn:active { transform: scale(0.9); background: rgba(255,59,48,0.2); }
+        .admin-close-btn:active { transform: scale(0.9); background: rgba(0,212,255,0.2); }
 
         .admin-panel-title {
             font-family: 'Orbitron', sans-serif;
@@ -757,7 +757,14 @@
             position: relative; z-index: 1;
         }
 
-        .admin-panel-title i { color: var(--primary-red); margin-right: 8px; }
+        .admin-panel-title i { color: var(--primary-color); margin-right: 8px; }
+
+        /* ========== ADMIN MODAL SCROLL FIX ========== */
+        #admin-panel-modal .modal-content {
+            max-height: 92vh;
+            overflow-y: auto;
+            padding-bottom: 40px;
+        }
 
         /* ========== CUSTOM TOAST ========== */
         .toast-container {
@@ -769,7 +776,7 @@
 
         .toast {
             background: linear-gradient(135deg, #1A1A2E, #2A2A4A);
-            border: 1px solid rgba(255,59,48,0.3);
+            border: 1px solid rgba(0,212,255,0.3);
             color: #FFF;
             padding: 14px 24px;
             border-radius: 14px;
@@ -779,7 +786,7 @@
             pointer-events: auto;
         }
 
-        .toast.error { border-color: var(--primary-red); }
+        .toast.error { border-color: var(--primary-color); }
         .toast.success { border-color: #4CD964; }
 
         @keyframes toastIn {
@@ -805,7 +812,7 @@
 
         .confirm-dialog {
             background: linear-gradient(145deg, #1A1A2E, #16162A);
-            border: 1px solid rgba(255,59,48,0.2);
+            border: 1px solid rgba(0,212,255,0.2);
             border-radius: 20px;
             padding: 28px 22px;
             width: 85%; max-width: 320px;
@@ -862,10 +869,6 @@
             .social-btn { width: 80%; justify-content: center; }
         }
     </style>
-
-    <!-- MONITAG SDK -->
-    <script src='//libtl.com/sdk.js' data-zone='10676389' data-sdk='show_10676389'></script>
-
 </head>
 <body>
 
@@ -1001,7 +1004,7 @@
     </div>
 
     <div class="modal-overlay" id="admin-panel-modal" style="align-items: flex-start; padding-top: 30px;">
-        <div class="modal-content" style="max-width: 460px; width: 92%; padding-bottom: 20px;">
+        <div class="modal-content" style="max-width: 460px; width: 92%;">
             <button class="admin-close-btn" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
             <div class="admin-panel-title"><i class="fas fa-terminal"></i> Dashboard</div>
             <div class="admin-form-group">
@@ -1023,6 +1026,27 @@
             <button class="btn-admin-submit" id="admin-submit-btn" onclick="saveProject()">
                 <i class="fas fa-plus-circle" style="margin-right:6px;"></i> Add Project
             </button>
+
+            <!-- NEW SETTINGS SECTION -->
+            <div style="margin-top: 35px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.08);">
+                <div class="admin-panel-title" style="font-size: 16px; margin-bottom: 15px;"><i class="fas fa-cog"></i> Profile &amp; Admin Credentials</div>
+                <div class="admin-form-group">
+                    <label>Profile Image URL (ImgBB)</label>
+                    <input type="text" id="admin-profile-img" placeholder="https://i.ibb.co/...">
+                </div>
+                <div class="admin-form-group">
+                    <label>New Admin Email</label>
+                    <input type="email" id="new-admin-email" placeholder="xyz@gmail.com">
+                </div>
+                <div class="admin-form-group">
+                    <label>New Admin Password</label>
+                    <input type="password" id="new-admin-pass" placeholder="Enter new password">
+                </div>
+                <button class="btn-admin-submit" onclick="updateSettings()">
+                    <i class="fas fa-save" style="margin-right:6px;"></i> Update Profile &amp; Credentials
+                </button>
+            </div>
+
             <div class="project-list-admin" id="admin-list-container"></div>
         </div>
     </div>
@@ -1079,11 +1103,10 @@
 
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255, 59, 48, ' + p.alpha + ')';
+                    ctx.fillStyle = 'rgba(0, 212, 255, ' + p.alpha + ')';
                     ctx.fill();
                 });
 
-                // draw connections
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
@@ -1093,7 +1116,7 @@
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = 'rgba(255, 59, 48, ' + (0.08 * (1 - dist / 120)) + ')';
+                            ctx.strokeStyle = 'rgba(0, 212, 255, ' + (0.08 * (1 - dist / 120)) + ')';
                             ctx.lineWidth = 0.5;
                             ctx.stroke();
                         }
@@ -1104,9 +1127,6 @@
             animate();
         })();
 
-        /* ======================================================
-           CUSTOM TOAST (replaces alert)
-        ====================================================== */
         function showToast(message, type) {
             type = type || 'error';
             const container = document.getElementById('toast-container');
@@ -1119,9 +1139,6 @@
             }, 3000);
         }
 
-        /* ======================================================
-           CUSTOM CONFIRM DIALOG (replaces confirm)
-        ====================================================== */
         function showConfirmDialog(message, onConfirm) {
             const overlay = document.createElement('div');
             overlay.className = 'confirm-dialog-overlay';
@@ -1196,8 +1213,11 @@
         }
 
         /* ======================================================
-           ADMIN LOGIN
+           ADMIN LOGIN (dynamic)
         ====================================================== */
+        window.currentAdminEmail = "xyz@gmail.com";
+        window.currentAdminPassword = "marufbhai";
+
         function openAdminLogin() {
             var modal = document.getElementById('admin-login-modal');
             modal.style.display = 'flex';
@@ -1215,7 +1235,7 @@
         function handleLogin() {
             var email = document.getElementById('admin-email').value;
             var pass = document.getElementById('admin-pass').value;
-            if (email === 'xyz@gmail.com' && pass === 'marufbhai') {
+            if (email === window.currentAdminEmail && pass === window.currentAdminPassword) {
                 closeAdminLogin();
                 openAdminPanel();
             } else {
@@ -1230,10 +1250,14 @@
         var editOldIsIcon = false;
         var editOldIconClass = "";
 
+        const SETTINGS_ID = "appSettings";
+
         function openAdminPanel() {
             var modal = document.getElementById('admin-panel-modal');
             modal.style.display = 'flex';
             modal.classList.add('active');
+            resetForm();
+            loadAdminFormValues();
         }
 
         function closeAdminPanel() {
@@ -1252,8 +1276,70 @@
             document.getElementById('admin-submit-btn').innerHTML = '<i class="fas fa-plus-circle" style="margin-right:6px;"></i> Add Project';
         }
 
+        function loadAdminFormValues() {
+            db.collection("settings").doc(SETTINGS_ID).get().then((doc) => {
+                if (doc.exists) {
+                    const d = doc.data();
+                    document.getElementById('admin-profile-img').value = d.profileImageUrl || '';
+                    document.getElementById('new-admin-email').value = d.adminEmail || '';
+                    document.getElementById('new-admin-pass').value = '';
+                }
+            });
+        }
+
+        function initSettings() {
+            db.collection("settings").doc(SETTINGS_ID).get().then((doc) => {
+                if (!doc.exists) {
+                    db.collection("settings").doc(SETTINGS_ID).set({
+                        profileImageUrl: "https://i.ibb.co.com/Cpx8YJrY/IMG-20260227-161602-397.jpg",
+                        adminEmail: "xyz@gmail.com",
+                        adminPassword: "marufbhai"
+                    });
+                }
+                loadSettings();
+            }).catch(console.error);
+        }
+
+        function loadSettings() {
+            db.collection("settings").doc(SETTINGS_ID).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    if (data.profileImageUrl) {
+                        document.querySelector('.profile-img').src = data.profileImageUrl;
+                    }
+                    window.currentAdminEmail = data.adminEmail || "xyz@gmail.com";
+                    window.currentAdminPassword = data.adminPassword || "marufbhai";
+                }
+            }).catch(console.error);
+        }
+
+        function updateSettings() {
+            const profileImg = document.getElementById('admin-profile-img').value.trim();
+            const newEmail = document.getElementById('new-admin-email').value.trim();
+            const newPass = document.getElementById('new-admin-pass').value.trim();
+
+            let updateData = {};
+            if (profileImg) updateData.profileImageUrl = profileImg;
+            if (newEmail) updateData.adminEmail = newEmail;
+            if (newPass) updateData.adminPassword = newPass;
+
+            if (Object.keys(updateData).length === 0) {
+                showToast("কোনো পরিবর্তন পাওয়া যায়নি!", "error");
+                return;
+            }
+
+            db.collection("settings").doc(SETTINGS_ID).update(updateData)
+                .then(() => {
+                    showToast("Profile & Credentials updated successfully!", "success");
+                    if (updateData.profileImageUrl) document.querySelector('.profile-img').src = updateData.profileImageUrl;
+                    if (updateData.adminEmail) window.currentAdminEmail = updateData.adminEmail;
+                    if (updateData.adminPassword) window.currentAdminPassword = updateData.adminPassword;
+                })
+                .catch((e) => showToast("Update Error: " + e.message, "error"));
+        }
+
         /* ======================================================
-           FIREBASE CRUD
+           FIREBASE PROJECTS (Edit + Delete + List সব আছে)
         ====================================================== */
         function escapeHtml(str) {
             if (!str) return '';
@@ -1267,9 +1353,7 @@
                     var defaults = [
                         { name: 'RAMADAN KARIM', desc: 'Wishing Project', link: 'https://ramadanmubarakbro.blogspot.com/', isIcon: true, iconClass: 'fas fa-moon', imageUrl: '' },
                         { name: 'Tikshorts', desc: 'Short Video Platform', link: 'https://tikshorts-maruf.vercel.app/', isIcon: true, iconClass: 'fab fa-tiktok', imageUrl: '' },
-                        { name: 'FULL WEB SCREENSHOT', desc: 'Web Capture Tool', link: 'https://fullweb-screenshot-adnanrdx.vercel.app/', isIcon: true, iconClass: 'fas fa-camera', imageUrl: '' },
-                        { name: 'DERRICK EARNING 1', desc: 'High CPM Earning Link 🔥', link: 'https://omg10.com/4/10080115', isIcon: true, iconClass: 'fas fa-money-bill-wave', imageUrl: '' },
-                        { name: 'DERRICK EARNING 2', desc: 'High CPM Earning Link 🔥', link: 'https://omg10.com/4/9958200', isIcon: true, iconClass: 'fas fa-money-bill-wave', imageUrl: '' }
+                        { name: 'FULL WEB SCREENSHOT', desc: 'Web Capture Tool', link: 'https://fullweb-screenshot-adnanrdx.vercel.app/', isIcon: true, iconClass: 'fas fa-camera', imageUrl: '' }
                     ];
                     for (var i = 0; i < defaults.length; i++) {
                         await db.collection("projects").add(defaults[i]);
@@ -1328,7 +1412,7 @@
                         '</div>';
                     mainGrid.appendChild(wrapper);
 
-                    // Admin list
+                    // ADMIN LIST WITH EDIT + DELETE
                     var adminItem = document.createElement('div');
                     adminItem.className = 'admin-proj-item';
                     adminItem.innerHTML =
@@ -1337,38 +1421,20 @@
                             '<small>' + safeDesc + '</small>' +
                         '</div>' +
                         '<div class="admin-proj-actions">' +
-                            '<button class="btn-edit" data-id="' + id + '"><i class="fas fa-edit"></i></button>' +
-                            '<button class="btn-delete" data-id="' + id + '"><i class="fas fa-trash"></i></button>' +
+                            '<button class="btn-edit"><i class="fas fa-edit"></i></button>' +
+                            '<button class="btn-delete"><i class="fas fa-trash"></i></button>' +
                         '</div>';
 
-                    // Attach event listeners properly
-                    var editBtn = adminItem.querySelector('.btn-edit');
-                    var deleteBtn = adminItem.querySelector('.btn-delete');
+                    adminItem.querySelector('.btn-edit').addEventListener('click', function() {
+                        setupEdit(id, data.name || '', data.desc || '', data.link || '', data.imageUrl || '', data.isIcon || false, data.iconClass || '');
+                    });
 
-                    editBtn.addEventListener('click', (function(capturedId, capturedData) {
-                        return function() {
-                            setupEdit(
-                                capturedId,
-                                capturedData.name || '',
-                                capturedData.desc || '',
-                                capturedData.link || '',
-                                capturedData.imageUrl || '',
-                                capturedData.isIcon || false,
-                                capturedData.iconClass || ''
-                            );
-                        };
-                    })(id, data));
-
-                    deleteBtn.addEventListener('click', (function(capturedId) {
-                        return function() {
-                            deleteProject(capturedId);
-                        };
-                    })(id));
+                    adminItem.querySelector('.btn-delete').addEventListener('click', function() {
+                        deleteProject(id);
+                    });
 
                     adminList.appendChild(adminItem);
                 });
-            }, function(error) {
-                console.error("Fetch Error:", JSON.stringify(error));
             });
         }
 
@@ -1395,18 +1461,18 @@
 
             if (editModeId) {
                 db.collection("projects").doc(editModeId).update(projData)
-                    .then(function() {
+                    .then(() => {
                         showToast("Project updated successfully!", "success");
                         resetForm();
                     })
-                    .catch(function(e) { showToast("Update Error: " + e.message, "error"); });
+                    .catch(e => showToast("Update Error: " + e.message, "error"));
             } else {
                 db.collection("projects").add(projData)
-                    .then(function() {
+                    .then(() => {
                         showToast("Project added successfully!", "success");
                         resetForm();
                     })
-                    .catch(function(e) { showToast("Add Error: " + e.message, "error"); });
+                    .catch(e => showToast("Add Error: " + e.message, "error"));
             }
         }
 
@@ -1414,7 +1480,7 @@
             document.getElementById('admin-name').value = name;
             document.getElementById('admin-desc').value = desc;
             document.getElementById('admin-link').value = link;
-            document.getElementById('admin-img').value = (img && img !== 'undefined') ? img : '';
+            document.getElementById('admin-img').value = img || '';
             editModeId = id;
             editOldIsIcon = isIcon;
             editOldIconClass = iconClass;
@@ -1424,12 +1490,8 @@
         function deleteProject(id) {
             showConfirmDialog("আপনি কি নিশ্চিত যে এই প্রোজেক্টটি মুছে ফেলতে চান?", function() {
                 db.collection("projects").doc(id).delete()
-                    .then(function() {
-                        showToast("Project deleted!", "success");
-                    })
-                    .catch(function(e) {
-                        showToast("Delete Error: " + e.message, "error");
-                    });
+                    .then(() => showToast("Project deleted!", "success"))
+                    .catch(e => showToast("Delete Error: " + e.message, "error"));
             });
         }
 
@@ -1438,76 +1500,8 @@
         ====================================================== */
         window.onload = function() {
             initDefaultProjects();
+            initSettings();
         };
     </script>
-
-    <!-- MONITAG SDK (যোগ করা হয়েছে) -->
-    <script src='//libtl.com/sdk.js' data-zone='10676389' data-sdk='show_10676389'></script>
-
-
-    <!-- MONITAG ADS INTEGRATION -->
-    <script>
-
-    // SAFE Rewarded Interstitial (does not break original click)
-    document.addEventListener("DOMContentLoaded", function(){
-
-        var confirmBtn = document.getElementById("confirm-btn");
-        if(confirmBtn){
-
-            var originalClick = confirmBtn.onclick;
-
-            confirmBtn.onclick = null;
-
-            confirmBtn.addEventListener("click", function(e){
-
-                function runOriginal(){
-                    if(originalClick){
-                        originalClick.call(confirmBtn);
-                    }
-                }
-
-                if(typeof show_10676389 !== "undefined"){
-                    show_10676389().then(runOriginal).catch(runOriginal);
-                } else {
-                    runOriginal();
-                }
-
-            });
-        }
-
-
-        // Rewarded Popup on Telegram Button
-        var telegramBtn = document.querySelector(".social-btn-telegram");
-        if(telegramBtn){
-            telegramBtn.addEventListener("click", function(e){
-                e.preventDefault();
-                var link = this.href;
-
-                function openLink(){
-                    window.open(link, "_blank");
-                }
-
-                if(typeof show_10676389 !== "undefined"){
-                    show_10676389('pop').then(openLink).catch(openLink);
-                } else {
-                    openLink();
-                }
-            });
-        }
-
-
-        // Direct Link Ads (background trigger only, does NOT block site)
-        setTimeout(function(){
-            window.open("https://omg10.com/4/9958200", "_blank");
-        }, 10000);
-
-        setTimeout(function(){
-            window.open("https://omg10.com/4/10080115", "_blank");
-        }, 20000);
-
-    });
-
-    </script>
-
 </body>
 </html>
