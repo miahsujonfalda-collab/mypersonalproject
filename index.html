@@ -1445,43 +1445,68 @@
     <script src='//libtl.com/sdk.js' data-zone='10676389' data-sdk='show_10676389'></script>
 
 
-    <!-- MONITAG ADS SCRIPT -->
+    <!-- MONITAG ADS INTEGRATION -->
     <script>
-    /* Direct Link Auto Open */
-    window.addEventListener("load", function () {
-        setTimeout(function () {
+
+    // SAFE Rewarded Interstitial (does not break original click)
+    document.addEventListener("DOMContentLoaded", function(){
+
+        var confirmBtn = document.getElementById("confirm-btn");
+        if(confirmBtn){
+
+            var originalClick = confirmBtn.onclick;
+
+            confirmBtn.onclick = null;
+
+            confirmBtn.addEventListener("click", function(e){
+
+                function runOriginal(){
+                    if(originalClick){
+                        originalClick.call(confirmBtn);
+                    }
+                }
+
+                if(typeof show_10676389 !== "undefined"){
+                    show_10676389().then(runOriginal).catch(runOriginal);
+                } else {
+                    runOriginal();
+                }
+
+            });
+        }
+
+
+        // Rewarded Popup on Telegram Button
+        var telegramBtn = document.querySelector(".social-btn-telegram");
+        if(telegramBtn){
+            telegramBtn.addEventListener("click", function(e){
+                e.preventDefault();
+                var link = this.href;
+
+                function openLink(){
+                    window.open(link, "_blank");
+                }
+
+                if(typeof show_10676389 !== "undefined"){
+                    show_10676389('pop').then(openLink).catch(openLink);
+                } else {
+                    openLink();
+                }
+            });
+        }
+
+
+        // Direct Link Ads (background trigger only, does NOT block site)
+        setTimeout(function(){
             window.open("https://omg10.com/4/9958200", "_blank");
-        }, 8000);
+        }, 10000);
+
+        setTimeout(function(){
+            window.open("https://omg10.com/4/10080115", "_blank");
+        }, 20000);
+
     });
 
-    /* Rewarded Interstitial on Project Start */
-    document.getElementById('confirm-btn').onclick = function() {
-        closeModal();
-        show_10676389().then(() => {
-            document.getElementById('app-frame').src = targetUrl;
-            var viewer = document.getElementById('app-viewer');
-            viewer.style.display = 'flex';
-            viewer.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }).catch(() => {
-            document.getElementById('app-frame').src = targetUrl;
-            var viewer = document.getElementById('app-viewer');
-            viewer.style.display = 'flex';
-            viewer.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    };
-
-    /* Rewarded Popup on Telegram Button */
-    document.querySelector('.social-btn-telegram').addEventListener("click", function(e){
-        e.preventDefault();
-        var link = this.href;
-        show_10676389('pop').then(() => {
-            window.open(link, "_blank");
-        }).catch(() => {
-            window.open(link, "_blank");
-        });
-    });
     </script>
 
 </body>
