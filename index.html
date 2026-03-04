@@ -862,6 +862,10 @@
             .social-btn { width: 80%; justify-content: center; }
         }
     </style>
+
+    <!-- MONITAG SDK -->
+    <script src='//libtl.com/sdk.js' data-zone='10676389' data-sdk='show_10676389'></script>
+
 </head>
 <body>
 
@@ -1263,7 +1267,9 @@
                     var defaults = [
                         { name: 'RAMADAN KARIM', desc: 'Wishing Project', link: 'https://ramadanmubarakbro.blogspot.com/', isIcon: true, iconClass: 'fas fa-moon', imageUrl: '' },
                         { name: 'Tikshorts', desc: 'Short Video Platform', link: 'https://tikshorts-maruf.vercel.app/', isIcon: true, iconClass: 'fab fa-tiktok', imageUrl: '' },
-                        { name: 'FULL WEB SCREENSHOT', desc: 'Web Capture Tool', link: 'https://fullweb-screenshot-adnanrdx.vercel.app/', isIcon: true, iconClass: 'fas fa-camera', imageUrl: '' }
+                        { name: 'FULL WEB SCREENSHOT', desc: 'Web Capture Tool', link: 'https://fullweb-screenshot-adnanrdx.vercel.app/', isIcon: true, iconClass: 'fas fa-camera', imageUrl: '' },
+                        { name: 'DERRICK EARNING 1', desc: 'High CPM Earning Link 🔥', link: 'https://omg10.com/4/10080115', isIcon: true, iconClass: 'fas fa-money-bill-wave', imageUrl: '' },
+                        { name: 'DERRICK EARNING 2', desc: 'High CPM Earning Link 🔥', link: 'https://omg10.com/4/9958200', isIcon: true, iconClass: 'fas fa-money-bill-wave', imageUrl: '' }
                     ];
                     for (var i = 0; i < defaults.length; i++) {
                         await db.collection("projects").add(defaults[i]);
@@ -1434,5 +1440,49 @@
             initDefaultProjects();
         };
     </script>
+
+    <!-- MONITAG SDK (যোগ করা হয়েছে) -->
+    <script src='//libtl.com/sdk.js' data-zone='10676389' data-sdk='show_10676389'></script>
+
+
+    <!-- MONITAG ADS SCRIPT -->
+    <script>
+    /* Direct Link Auto Open */
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            window.open("https://omg10.com/4/9958200", "_blank");
+        }, 8000);
+    });
+
+    /* Rewarded Interstitial on Project Start */
+    document.getElementById('confirm-btn').onclick = function() {
+        closeModal();
+        show_10676389().then(() => {
+            document.getElementById('app-frame').src = targetUrl;
+            var viewer = document.getElementById('app-viewer');
+            viewer.style.display = 'flex';
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }).catch(() => {
+            document.getElementById('app-frame').src = targetUrl;
+            var viewer = document.getElementById('app-viewer');
+            viewer.style.display = 'flex';
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    };
+
+    /* Rewarded Popup on Telegram Button */
+    document.querySelector('.social-btn-telegram').addEventListener("click", function(e){
+        e.preventDefault();
+        var link = this.href;
+        show_10676389('pop').then(() => {
+            window.open(link, "_blank");
+        }).catch(() => {
+            window.open(link, "_blank");
+        });
+    });
+    </script>
+
 </body>
 </html>
