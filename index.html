@@ -5,1536 +5,1043 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADNAN DEV PROJECT LIST</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Lexend:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
     <style>
-        :root {
-            --primary-green: #4CAF50;
-            --green-glow: rgba(76, 175, 80, 0.5);
-            --green-deep: #388E3C;
-            --white: #FFFFFF;
-            --bg-soft: #0A0A0F;
-            --bg-card: rgba(255,255,255,0.04);
-            --text-dark: #F5F5F7;
-            --text-gray: #A0A0A8;
-            --glass: rgba(255,255,255,0.06);
-            --glass-border: rgba(255,255,255,0.1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', 'Hind Siliguri', sans-serif; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            background: var(--bg-soft);
-            color: var(--text-dark);
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* ========== LIVE PARTICLE CANVAS ========== */
-        #particles-canvas {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0; pointer-events: none;
-        }
-
-        /* ========== HEADER ========== */
-        header {
-            position: relative;
-            padding: 50px 20px 30px;
-            text-align: center;
-            z-index: 2;
-            overflow: hidden;
-        }
-
-        .header-live-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(76,175,80,0.12) 0%, transparent 100%);
-            z-index: 0;
-        }
-
-        .header-live-bg::before {
-            content: '';
-            position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(76,175,80,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(76,175,80,0.06) 0%, transparent 50%);
-            animation: headerPulse 6s ease-in-out infinite; /* Changed duration */
-        }
-
-        @keyframes headerPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-            50% { transform: scale(1.05) rotate(3deg); opacity: 0.9; } /* Slight change */
-        }
-
-        /* ========== PROFILE ========== */
-        .profile-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 14px;
-            z-index: 2;
-        }
-
-        .profile-ring {
-            position: absolute; top: -8px; left: -8px;
-            width: calc(100% + 16px); height: calc(100% + 16px);
-            border-radius: 50%;
-            border: 3px solid transparent;
-            border-image: none;
-            animation: profileRingSpin 4s linear infinite; /* Changed duration */
-        }
-
-        .profile-ring::before {
-            content: '';
-            position: absolute; top: -3px; left: -3px;
-            width: calc(100% + 6px); height: calc(100% + 6px);
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--primary-green), #81C784, #4CAF50, #AED581, var(--primary-green));
-            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
-            mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
-            animation: profileRingSpin 4s linear infinite; /* Changed duration */
-        }
-
-        @keyframes profileRingSpin {
-            to { transform: rotate(360deg); }
-        }
-
-        .profile-glow {
-            position: absolute; top: -20px; left: -20px;
-            width: calc(100% + 40px); height: calc(100% + 40px);
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(76,175,80,0.3) 0%, transparent 70%);
-            animation: profileGlowPulse 2.5s ease-in-out infinite; /* Changed duration */
-            z-index: -1;
-        }
-
-        @keyframes profileGlowPulse {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.1); opacity: 0.8; } /* Slight change */
-        }
-
-        .profile-img {
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            border: 3px solid var(--bg-soft);
-            object-fit: cover;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* ========== VERIFIED BADGE (LIVE SPINNING) ========== */
-        .verified-container {
-            position: absolute; bottom: 2px; right: 2px;
-            z-index: 5;
-        }
-
-        .verified-spin-ring {
-            position: absolute; top: -4px; left: -4px;
-            width: calc(100% + 8px); height: calc(100% + 8px);
-            border-radius: 50%;
-            border: 2px solid transparent;
-            border-top-color: #FF3B30;
-            border-right-color: #FF6B6B;
-            animation: badgeSpin 2s linear infinite; /* Changed duration */
-        }
-
-        @keyframes badgeSpin {
-            to { transform: rotate(360deg); }
-        }
-
-        .verified-badge {
-            background: linear-gradient(135deg, #FF3B30, #FF6B6B);
-            border-radius: 50%;
-            color: white;
-            font-size: 14px;
-            width: 24px; height: 24px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 10px rgba(255,59,48,0.6);
-            animation: badgePulse 2.5s ease-in-out infinite; /* Changed duration */
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(255,59,48,0.4); }
-            50% { box-shadow: 0 0 20px rgba(255,59,48,0.8), 0 0 40px rgba(255,59,48,0.3); }
-        }
-
-        /* ========== NAME & SUBTITLE ========== */
-        .name-container {
-            position: relative; z-index: 2;
-            animation: fadeSlideUp 0.8s ease forwards;
-        }
-
-        .name-container h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px; font-weight: 900;
-            color: #FFF;
-            letter-spacing: 2px;
-            display: inline-flex;
-            align-items: center; gap: 8px;
-            text-shadow: 0 0 30px rgba(76,175,80,0.3);
-        }
-
-        .name-container h1 .inline-badge {
-            width: 22px; height: 22px;
-            background: linear-gradient(135deg, #FF3B30, #FF6B6B);
-            border-radius: 50%;
-            display: inline-flex; align-items: center; justify-content: center;
-            font-size: 11px; color: white;
-            animation: badgePulse 2s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-
-        .sub-title {
-            color: var(--text-gray);
-            font-size: 13px; font-weight: 400;
-            margin-top: 4px;
-            letter-spacing: 1px;
-            animation: fadeSlideUp 0.8s ease 0.2s both;
-        }
-
-        .tagline {
-            color: var(--primary-green);
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 6px;
-            animation: fadeSlideUp 0.8s ease 0.3s both;
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ========== SOCIAL BUTTONS (TELEGRAM + DEVELOPER) ========== */
-        .social-buttons {
-            display: flex; gap: 12px;
-            justify-content: center;
-            margin-top: 18px;
-            position: relative; z-index: 2;
-            animation: fadeSlideUp 0.8s ease 0.4s both;
-        }
-
-        .social-btn {
-            display: flex; align-items: center; gap: 8px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 13px; font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border: none;
-        }
-
-        .social-btn::before {
-            content: '';
-            position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.15), transparent, transparent);
-            animation: socialBtnSweep 4s linear infinite; /* Changed duration */
-        }
-
-        @keyframes socialBtnSweep {
-            to { transform: rotate(360deg); }
-        }
-
-        .social-btn-telegram {
-            background: linear-gradient(135deg, var(--primary-green), #81C784);
-            color: white;
-            box-shadow: 0 4px 20px rgba(76,175,80,0.4);
-        }
-
-        .social-btn-telegram:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 10px rgba(76,175,80,0.6);
-        }
-
-        .social-btn-dev {
-            background: rgba(255,255,255,0.08);
-            color: #FFF;
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-
-        .social-btn-dev:active {
-            transform: scale(0.95);
-            background: rgba(255,255,255,0.12);
-        }
-
-        .social-btn i { font-size: 15px; position: relative; z-index: 1; }
-        .social-btn span { position: relative; z-index: 1; }
-
-        /* ========== STATS BAR ========== */
-        .stats-bar {
-            display: flex; justify-content: center; gap: 30px;
-            margin-top: 20px; padding: 16px 0;
-            position: relative; z-index: 2;
-            animation: fadeSlideUp 0.8s ease 0.5s both;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px; font-weight: 900;
-            color: var(--primary-green);
-            text-shadow: 0 0 20px rgba(76,175,80,0.3);
-        }
-
-        .stat-label {
-            font-size: 10px; color: var(--text-gray);
-            letter-spacing: 2px; text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        .stat-divider {
-            width: 1px; background: rgba(255,255,255,0.1);
-            align-self: stretch;
-        }
-
-        /* ========== SECTION TITLE ========== */
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px; font-weight: 700;
-            color: var(--text-gray);
-            letter-spacing: 3px; text-transform: uppercase;
-            text-align: center;
-            margin: 25px 0 15px;
-            position: relative; z-index: 2;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 40px; height: 3px;
-            background: var(--primary-green);
-            margin: 8px auto 0;
-            border-radius: 2px;
-            box-shadow: 0 0 10px var(--green-glow);
-        }
-
-        /* ========== CONTAINER ========== */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 10px 15px 120px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* ========== PROJECT GRID ========== */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        /* ========== CARD WITH ROLLING BORDER ========== */
-        .card-wrapper {
-            position: relative;
-            border-radius: 22px;
-            padding: 2px;
-            background: transparent;
-            animation: fadeScaleIn 0.5s ease both;
-        }
-
-        .card-wrapper::before {
-            content: '';
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            border-radius: 22px;
-            background: conic-gradient(from var(--card-angle, 0deg), var(--primary-green), #81C784, transparent, transparent, transparent, var(--primary-green));
-            animation: cardBorderRoll 5s linear infinite; /* Changed duration */
-            opacity: 0.5;
-            transition: opacity 0.3s ease;
-        }
-
-        .card-wrapper:hover::before,
-        .card-wrapper:active::before {
-            opacity: 1;
-        }
-
-        @keyframes cardBorderRoll {
-            to { --card-angle: 360deg; }
-        }
-
-        @property --card-angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
-
-        .card {
-            position: relative;
-            background: linear-gradient(145deg, rgba(20,20,30,0.95), rgba(15,15,22,0.98));
-            border-radius: 20px;
-            padding: 25px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(76,175,80,0.06) 0%, transparent 70%);
-            transition: opacity 0.3s;
-        }
-
-        .card:active {
-            transform: scale(0.93);
-        }
-
-        .card:active::before {
-            opacity: 0.5;
-        }
-
-        .card-shimmer {
-            position: absolute; top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
-            animation: cardShimmer 4s ease-in-out infinite; /* Changed duration */
-        }
-
-        @keyframes cardShimmer {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        @keyframes fadeScaleIn {
-            from { opacity: 0; transform: scale(0.8) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .icon-box {
-            width: 70px; height: 70px;
-            margin: 0 auto 12px;
-            background: rgba(76,175,80,0.08);
-            border: 1px solid rgba(76,175,80,0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center; justify-content: center;
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
-
-        .card:active .icon-box {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(76,175,80,0.3);
-        }
-
-        .icon-box i { font-size: 28px; color: var(--primary-green); }
-        .icon-box img { width: 60%; height: 60%; object-fit: contain; }
-
-        .card h3 {
-            font-size: 14px; font-weight: 700;
-            color: #FFF;
-            margin-bottom: 4px;
-            position: relative; z-index: 1;
-        }
-
-        .card p {
-            font-size: 11px;
-            color: var(--text-gray);
-            line-height: 1.3;
-            position: relative; z-index: 1;
-        }
-
-        .card-pulse-dot {
-            position: absolute; top: 12px; right: 12px;
-            width: 8px; height: 8px;
-            background: #4CD964;
-            border-radius: 50%;
-            z-index: 2;
-            animation: pulseDot 2.5s ease-in-out infinite; /* Changed duration */
-        }
-
-        @keyframes pulseDot {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
-        }
-
-        /* ========== FOOTER BANNER ========== */
-        .footer-banner {
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-            margin-top: 10px;
-        }
-
-        .footer-banner p {
-            font-size: 11px; color: var(--text-gray);
-            letter-spacing: 1px;
-        }
-
-        .footer-banner .heart {
-            color: var(--primary-green);
-            animation: heartBeat 2s ease-in-out infinite; /* Changed duration */
-            display: inline-block;
-        }
-
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.15); }
-        }
-
-        /* ========== SCROLLING MARQUEE ========== */
-        .marquee-wrapper {
-            overflow: hidden;
-            position: relative;
-            z-index: 2;
-            margin: 15px 0;
-            padding: 10px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .marquee-content {
-            display: flex; gap: 50px;
-            animation: marqueeScroll 20s linear infinite; /* Changed duration */
-            width: max-content;
-        }
-
-        .marquee-content span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            color: rgba(76,175,80,0.4);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        @keyframes marqueeScroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        /* ========== MODAL ========== */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
-            display: none; align-items: center; justify-content: center; z-index: 3000;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: linear-gradient(145deg, #1A1A2E, #16162A);
-            border: 1px solid rgba(76,175,80,0.2);
-            padding: 30px 20px; border-radius: 24px;
-            width: 85%; max-width: 340px; text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(76,175,80,0.1);
-            animation: modalContentSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .modal-content::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(76,175,80,0.06) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        @keyframes modalContentSlide {
-            from { opacity: 0; transform: scale(0.8) translateY(30px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .modal-content h2 {
-            color: #FFF;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 16px;
-            position: relative; z-index: 1;
-        }
-
-        .modal-content p {
-            color: var(--text-gray);
-            position: relative; z-index: 1;
-        }
-
-        .modal-btns {
-            display: flex; gap: 10px; margin-top: 20px;
-            position: relative; z-index: 1;
-        }
-
-        .btn {
-            flex: 1; padding: 13px; border: none; border-radius: 14px;
-            font-weight: 700; cursor: pointer; font-size: 14px;
-            transition: all 0.3s ease; position: relative; overflow: hidden;
-        }
-
-        .btn:active { transform: scale(0.95); }
-
-        .btn-cancel {
-            background: rgba(255,255,255,0.08);
-            color: #AAA;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .btn-start {
-            background: linear-gradient(135deg, var(--primary-green), #81C784);
-            color: white;
-            box-shadow: 0 4px 20px rgba(76,175,80,0.4);
-        }
-
-        .btn-start::before {
-            content: '';
-            position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent, transparent);
-            animation: socialBtnSweep 3s linear infinite;
-        }
-
-        /* ========== APP VIEWER ========== */
-        #app-viewer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-soft); z-index: 4000;
-            display: none; flex-direction: column;
-        }
-
-        #app-viewer.active { display: flex; animation: viewerSlideIn 0.4s ease; }
-
-        @keyframes viewerSlideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-
-        .viewer-header {
-            padding: 15px 20px;
-            background: linear-gradient(135deg, var(--primary-green), #388E3C);
-            color: white;
-            display: flex; align-items: center; gap: 12px;
-            font-weight: 600; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(76,175,80,0.3);
-        }
-
-        .viewer-header:active { opacity: 0.85; }
-
-        iframe { flex-grow: 1; border: none; width: 100%; }
-
-        /* ========== ADMIN ACCESS BUTTON ========== */
-        #admin-access-btn {
-            position: fixed; bottom: 20px; right: 20px;
-            background: linear-gradient(135deg, #1A1A2E, #2A2A4A);
-            color: white; border: 1px solid rgba(76,175,80,0.3);
-            padding: 12px 22px; border-radius: 50px;
-            font-weight: 600; cursor: pointer; z-index: 2000;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.4), 0 0 15px rgba(76,175,80,0.15);
-            display: flex; align-items: center; gap: 8px;
-            transition: all 0.3s ease;
-            font-size: 13px;
-            animation: adminBtnFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes adminBtnFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        #admin-access-btn:active { transform: scale(0.95); }
-        #admin-access-btn i { color: var(--primary-green); }
-
-        /* ========== ADMIN PANEL ========== */
-        .admin-form-group { margin-bottom: 14px; text-align: left; position: relative; z-index: 1; }
-
-        .admin-form-group label {
-            display: block; margin-bottom: 5px;
-            font-weight: 600; font-size: 12px;
-            color: var(--text-gray);
-            letter-spacing: 1px; text-transform: uppercase;
-        }
-
-        .admin-form-group input {
-            width: 100%; padding: 12px 14px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            font-size: 14px;
-            background: rgba(255,255,255,0.05);
-            color: #FFF;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .admin-form-group input::placeholder { color: rgba(255,255,255,0.25); }
-        .admin-form-group input:focus {
-            border-color: var(--primary-green);
-            box-shadow: 0 0 15px rgba(76,175,80,0.15);
-        }
-
-        .btn-admin-submit {
-            background: linear-gradient(135deg, var(--primary-green), #81C784);
-            color: white; border: none;
-            padding: 13px; width: 100%; border-radius: 12px;
-            font-weight: 700; cursor: pointer; font-size: 14px;
-            margin-top: 10px;
-            box-shadow: 0 4px 20px rgba(76,175,80,0.3);
-            transition: all 0.3s ease;
-            position: relative; z-index: 1;
-        }
-
-        .btn-admin-submit:active { transform: scale(0.97); }
-
-        .project-list-admin {
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 15px;
-            max-height: 250px;
-            overflow-y: auto;
-            text-align: left;
-            position: relative; z-index: 1;
-        }
-
-        .project-list-admin::-webkit-scrollbar { width: 4px; }
-        .project-list-admin::-webkit-scrollbar-track { background: transparent; }
-        .project-list-admin::-webkit-scrollbar-thumb { background: rgba(76,175,80,0.3); border-radius: 4px; }
-
-        .admin-proj-item {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,0.04);
-            padding: 12px; margin-bottom: 10px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.06);
-            transition: all 0.3s ease;
-        }
-
-        .admin-proj-item strong { color: #FFF; font-size: 13px; }
-        .admin-proj-item small { color: var(--text-gray); }
-
-        .admin-proj-actions button {
-            padding: 8px 10px; margin-left: 5px;
-            border: none; border-radius: 8px;
-            cursor: pointer; font-size: 12px; color: white;
-            transition: all 0.3s ease;
-        }
-
-        .admin-proj-actions button:active { transform: scale(0.9); }
-        .btn-edit { background: linear-gradient(135deg, var(--primary-green), #81C784); }
-        .btn-delete { background: linear-gradient(135deg, #FF3B30, #FF6B6B); }
-
-        .admin-close-btn {
-            position: absolute; right: 18px; top: 18px;
-            font-size: 18px; cursor: pointer;
-            color: var(--text-gray);
-            background: rgba(255,255,255,0.06);
-            border: none;
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 5;
-        }
-
-        .admin-close-btn:active { transform: scale(0.9); background: rgba(76,175,80,0.2); }
-
-        .admin-panel-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 18px; font-weight: 700;
-            color: #FFF;
-            margin-bottom: 20px;
-            position: relative; z-index: 1;
-        }
-
-        .admin-panel-title i { color: var(--primary-green); margin-right: 8px; }
-
-        /* ========== CUSTOM TOAST ========== */
-        .toast-container {
-            position: fixed; top: 20px; left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        .toast {
-            background: linear-gradient(135deg, #1A1A2E, #2A2A4A);
-            border: 1px solid rgba(76,175,80,0.3);
-            color: #FFF;
-            padding: 14px 24px;
-            border-radius: 14px;
-            font-size: 14px; font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: toastIn 0.4s ease, toastOut 0.4s ease 2.6s forwards;
-            pointer-events: auto;
-        }
-
-        .toast.error { border-color: #FF3B30; }
-        .toast.success { border-color: #4CD964; }
-
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes toastOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-20px); }
-        }
-
-        /* ========== CUSTOM CONFIRM DIALOG ========== */
-        .confirm-dialog-overlay {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(8px);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 9000;
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        .confirm-dialog {
-            background: linear-gradient(145deg, #1A1A2E, #16162A);
-            border: 1px solid rgba(76,175,80,0.2);
-            border-radius: 20px;
-            padding: 28px 22px;
-            width: 85%; max-width: 320px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            animation: modalContentSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .confirm-dialog p {
-            color: #DDD; font-size: 15px;
-            margin-bottom: 22px; line-height: 1.5;
-        }
-
-        .confirm-dialog .confirm-btns {
-            display: flex; gap: 10px;
-        }
-
-        /* ========== LOADING SKELETON ========== */
-        .skeleton-card {
-            background: rgba(255,255,255,0.03);
-            border-radius: 20px;
-            padding: 25px 10px;
-            text-align: center;
-            animation: skeletonPulse 1.5s ease-in-out infinite;
-        }
-
-        .skeleton-circle {
-            width: 70px; height: 70px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 50%;
-            margin: 0 auto 12px;
-        }
-
-        .skeleton-line {
-            height: 12px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 6px;
-            margin: 6px auto;
-        }
-
-        .skeleton-line.w60 { width: 60%; }
-        .skeleton-line.w80 { width: 80%; }
-
-        @keyframes skeletonPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 360px) {
-            .project-grid { gap: 10px; }
-            .card { padding: 20px 8px; }
-            .social-buttons { flex-direction: column; align-items: center; gap: 10px; }
-            .social-btn { width: 80%; justify-content: center; }
+        @property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+        :root{
+            --bg-primary:#F0F4F8;--bg-surface:#FFFFFF;--bg-elevated:#E3E9EF;
+            --bg-nav:rgba(240,244,248,0.88);--primary:#0066FF;--primary-light:#4C9AFF;
+            --primary-glow:rgba(0,102,255,0.14);--accent:#00D68F;
+            --text-primary:#12121A;--text-secondary:#6B6B78;--text-muted:#9B9BA8;
+            --border:rgba(0,0,0,0.07);--border-hover:rgba(0,0,0,0.15);
+            --shadow-sm:0 1px 4px rgba(0,0,0,0.04);--shadow-md:0 6px 20px rgba(0,0,0,0.06);
+            --shadow-lg:0 14px 44px rgba(0,0,0,0.09);
+            --overlay-bg:rgba(240,244,248,0.82);--card-glow:rgba(0,102,255,0.07);
+            --toast-bg:#12121A;--toast-text:#F0EDE6;
+            --ring-from:#0066FF;--ring-mid:#4C9AFF;--ring-to:#00D68F;
+            --particle-color:rgba(0,102,255,0.35);--line-alpha:0.1;
+            --blob1:rgba(0,102,255,0.08);--blob2:rgba(0,214,143,0.06);--blob3:rgba(100,50,255,0.05);
+        }
+        .dark{
+            --bg-primary:#08080F;--bg-surface:#101018;--bg-elevated:#1A1A26;
+            --bg-nav:rgba(16,16,24,0.9);--primary:#3399FF;--primary-light:#66B3FF;
+            --primary-glow:rgba(51,153,255,0.16);--accent:#00E5A0;
+            --text-primary:#ECEAE4;--text-secondary:#8B8B98;--text-muted:#55556A;
+            --border:rgba(255,255,255,0.07);--border-hover:rgba(255,255,255,0.16);
+            --shadow-sm:0 1px 4px rgba(0,0,0,0.3);--shadow-md:0 6px 20px rgba(0,0,0,0.35);
+            --shadow-lg:0 14px 44px rgba(0,0,0,0.5);
+            --overlay-bg:rgba(8,8,15,0.84);--card-glow:rgba(51,153,255,0.06);
+            --toast-bg:#1A1A26;--toast-text:#ECEAE4;
+            --ring-from:#3399FF;--ring-mid:#66B3FF;--ring-to:#00E5A0;
+            --particle-color:rgba(51,153,255,0.5);--line-alpha:0.15;
+            --blob1:rgba(51,153,255,0.06);--blob2:rgba(0,229,160,0.04);--blob3:rgba(130,80,255,0.04);
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:'Lexend','Hind Siliguri',sans-serif;
+            background:var(--bg-primary);color:var(--text-primary);
+            min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;
+        }
+
+        /* ===== SPLASH ===== */
+        #splash{
+            position:fixed;inset:0;background:var(--bg-primary);z-index:10000;
+            display:flex;align-items:center;justify-content:center;flex-direction:column;
+            transition:opacity .6s ease,visibility .6s ease;
+        }
+        #splash.gone{opacity:0;visibility:hidden;pointer-events:none}
+        .spl-ring{
+            width:76px;height:76px;border-radius:50%;position:relative;margin-bottom:22px;
+        }
+        .spl-ring::before{
+            content:'';position:absolute;inset:0;border-radius:50%;
+            border:3px solid var(--border);border-top-color:var(--primary);border-right-color:var(--ring-to);
+            animation:spin 1s linear infinite;
+        }
+        .spl-ring i{
+            position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+            font-size:26px;color:var(--primary);
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .spl-name{font-family:'Syne','Hind Siliguri',sans-serif;font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:14px;color:var(--text-primary)}
+        .spl-bar{width:110px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+        .spl-bar-fill{width:0;height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:3px;animation:splFill 1.6s ease forwards}
+        @keyframes splFill{to{width:100%}}
+
+        /* ===== CANVAS + BLOBS ===== */
+        #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+        .bg-blob{
+            position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+            filter:blur(90px);will-change:transform;
+        }
+        .blob-1{width:340px;height:340px;background:var(--blob1);top:-80px;left:-60px;animation:blobA 22s ease-in-out infinite alternate}
+        .blob-2{width:280px;height:280px;background:var(--blob2);bottom:10%;right:-40px;animation:blobB 18s ease-in-out infinite alternate}
+        .blob-3{width:220px;height:220px;background:var(--blob3);top:45%;left:30%;animation:blobC 25s ease-in-out infinite alternate}
+        @keyframes blobA{0%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,80px) scale(1.15)}100%{transform:translate(-30px,40px) scale(0.9)}}
+        @keyframes blobB{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,-50px) scale(1.1)}100%{transform:translate(20px,-80px) scale(0.95)}}
+        @keyframes blobC{0%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-60px) scale(1.2)}100%{transform:translate(-50px,30px) scale(0.85)}}
+
+        .bg-grid{
+            position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.25;
+            background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+            background-size:44px 44px;
+        }
+
+        /* ===== APP SHELL ===== */
+        .app-shell{position:relative;z-index:1;padding-bottom:76px}
+        .section{display:none;min-height:calc(100vh - 76px);padding:20px 18px 30px;max-width:620px;margin:0 auto}
+        .section.active{display:block;animation:secIn .4s ease}
+        @keyframes secIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+        /* ===== HOME ===== */
+        .home-center{text-align:center;padding-top:36px}
+        .avatar-wrap{position:relative;display:inline-block;margin-bottom:18px}
+        .avatar-wrap::before{
+            content:'';position:absolute;inset:-5px;border-radius:50%;
+            background:conic-gradient(from var(--a),var(--ring-from),var(--ring-mid),var(--ring-to),var(--ring-from));
+            animation:ringSpin 4s linear infinite;z-index:0;
+        }
+        .avatar-wrap::after{
+            content:'';position:absolute;inset:-20px;border-radius:50%;
+            background:radial-gradient(circle,var(--primary-glow),transparent 70%);
+            animation:glowBreathe 3s ease-in-out infinite;z-index:-1;
+        }
+        @keyframes ringSpin{to{--a:360deg}}
+        @keyframes glowBreathe{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.8;transform:scale(1.08)}}
+        .avatar{
+            width:108px;height:108px;border-radius:50%;object-fit:cover;
+            border:4px solid var(--bg-primary);position:relative;z-index:1;display:block;
+        }
+        .badge-v{
+            position:absolute;bottom:2px;right:2px;z-index:2;width:28px;height:28px;border-radius:50%;
+            background:linear-gradient(135deg,var(--primary),var(--primary-light));
+            display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;
+            border:3px solid var(--bg-primary);box-shadow:0 2px 10px var(--primary-glow);
+        }
+        .home-name{
+            font-family:'Syne','Hind Siliguri',sans-serif;font-size:28px;font-weight:800;
+            display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.5px;
+        }
+        .home-name .mini-badge{
+            width:20px;height:20px;border-radius:50%;
+            background:linear-gradient(135deg,var(--primary),var(--primary-light));
+            display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:9px;flex-shrink:0;
+        }
+        .home-sub{font-family:'Lexend','Hind Siliguri',sans-serif;font-size:14px;color:var(--text-secondary);margin-top:2px;font-weight:400}
+        .home-tag{font-family:'Fira Code',monospace;font-size:12px;color:var(--primary);letter-spacing:1px;margin-top:6px}
+        .home-bio{margin-top:16px;font-size:15px;color:var(--text-primary);line-height:1.6;padding:0 16px;font-weight:300}
+        .home-skills{margin-top:20px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+        .skill-tag{
+            background:var(--bg-elevated);padding:6px 14px;border-radius:20px;font-size:13px;
+            color:var(--primary);border:1px solid var(--border);font-weight:500;
+            transition:transform .2s,border-color .2s;
+        }
+        .skill-tag:active{transform:scale(.95);border-color:var(--primary)}
+
+        .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+        .s-card{
+            background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;
+            padding:14px 6px;text-align:center;transition:transform .2s,border-color .2s;
+        }
+        .s-card:active{transform:scale(.97);border-color:var(--primary)}
+        .s-val{font-family:'Syne','Hind Siliguri',sans-serif;font-size:22px;font-weight:700;color:var(--primary)}
+        .s-key{font-family:'Fira Code',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+
+        .marquee-bar{overflow:hidden;margin-top:26px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        .marquee-track{display:flex;gap:36px;width:max-content;animation:marq 20s linear infinite}
+        .marquee-track span{font-family:'Fira Code',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;white-space:nowrap;opacity:.55}
+        @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+        /* ===== PROJECTS ===== */
+        .proj-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+        .proj-head .sec-label{font-family:'Fira Code',monospace;font-size:11px;font-weight:500;color:var(--primary);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+        .proj-head h2{font-family:'Syne','Hind Siliguri',sans-serif;font-size:26px;font-weight:700;line-height:1.15}
+        .proj-badge{font-family:'Fira Code',monospace;font-size:12px;color:var(--text-muted);background:var(--bg-surface);border:1px solid var(--border);padding:5px 13px;border-radius:18px;white-space:nowrap}
+
+        .p-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+
+        /* ===== ANIMATED CARD BORDERS ===== */
+        .p-card{
+            --a:0deg;
+            position:relative;
+            background:linear-gradient(var(--bg-surface),var(--bg-surface)) padding-box,
+                        conic-gradient(from var(--a),var(--ring-from),var(--ring-mid),var(--ring-to),transparent 40%,var(--ring-from)) border-box;
+            border:2.5px solid transparent;
+            border-radius:18px;padding:22px 12px;text-align:center;cursor:pointer;
+            animation:borderRotate 3s linear infinite,cardPulse 2.5s ease-in-out infinite alternate;
+            transition:transform .25s;overflow:hidden;
+        }
+        @keyframes borderRotate{to{--a:360deg}}
+        @keyframes cardPulse{
+            0%{box-shadow:0 4px 16px rgba(0,102,255,0.06),0 0 0 transparent}
+            100%{box-shadow:0 4px 28px rgba(0,102,255,0.15),0 0 40px rgba(0,102,255,0.04)}
+        }
+        .p-card::after{
+            content:'';position:absolute;bottom:0;left:0;width:100%;height:0;
+            background:linear-gradient(to top,var(--card-glow),transparent);
+            transition:height .35s;pointer-events:none;
+        }
+        .p-card:active{transform:scale(.96)}
+        .p-card:active::after{height:100%}
+        .p-card .dot-live{
+            position:absolute;top:10px;right:10px;width:8px;height:8px;
+            background:var(--accent);border-radius:50%;
+            box-shadow:0 0 8px var(--accent);
+            animation:dotP 2s ease-in-out infinite;
+        }
+        @keyframes dotP{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+        .p-icon{
+            width:56px;height:56px;margin:0 auto 10px;
+            background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;
+            display:flex;align-items:center;justify-content:center;position:relative;z-index:1;
+            transition:all .25s;
+        }
+        .p-card:active .p-icon{background:var(--primary-glow);border-color:var(--primary)}
+        .p-icon i{font-size:20px;color:var(--primary)}
+        .p-icon img{width:55%;height:55%;object-fit:contain}
+        .p-card h3{font-family:'Syne','Hind Siliguri',sans-serif;font-size:13px;font-weight:600;margin-bottom:3px;position:relative;z-index:1}
+        .p-card p{font-size:11px;color:var(--text-secondary);line-height:1.35;position:relative;z-index:1;font-weight:300}
+
+        .skel{background:var(--bg-surface);border:1px solid var(--border);border-radius:16px;padding:20px 12px;text-align:center;animation:skelP 1.4s ease-in-out infinite}
+        .skel-c{width:54px;height:54px;background:var(--bg-elevated);border-radius:14px;margin:0 auto 10px}
+        .skel-l{height:10px;background:var(--bg-elevated);border-radius:5px;margin:5px auto}
+        .skel-l.w6{width:60%}.skel-l.w8{width:80%}
+        @keyframes skelP{0%,100%{opacity:.45}50%{opacity:1}}
+
+        .stagger>*{animation:stgI .4s ease both}
+        .stagger>*:nth-child(1){animation-delay:.04s}.stagger>*:nth-child(2){animation-delay:.1s}
+        .stagger>*:nth-child(3){animation-delay:.16s}.stagger>*:nth-child(4){animation-delay:.22s}
+        .stagger>*:nth-child(5){animation-delay:.28s}.stagger>*:nth-child(6){animation-delay:.34s}
+        .stagger>*:nth-child(7){animation-delay:.4s}.stagger>*:nth-child(8){animation-delay:.46s}
+        .stagger>*:nth-child(9){animation-delay:.52s}.stagger>*:nth-child(10){animation-delay:.58s}
+        @keyframes stgI{from{opacity:0;transform:translateY(16px) scale(.95)}to{opacity:1;transform:none}}
+
+        /* ===== CONNECT ===== */
+        .conn-head .sec-label{font-family:'Fira Code',monospace;font-size:11px;font-weight:500;color:var(--primary);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+        .conn-head h2{font-family:'Syne','Hind Siliguri',sans-serif;font-size:26px;font-weight:700;margin-bottom:22px}
+        .conn-cards{display:flex;flex-direction:column;gap:14px;margin-bottom:30px}
+        .conn-card{
+            display:block;text-decoration:none;color:var(--text-primary);
+            background:var(--bg-surface);border:1px solid var(--border);border-radius:18px;
+            padding:22px;transition:transform .25s,border-color .25s;cursor:pointer;position:relative;overflow:hidden;
+        }
+        .conn-card:active{transform:scale(.98);border-color:var(--primary)}
+        .conn-icon{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+        .conn-icon.tg{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+        .conn-icon.dev{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}
+        .conn-card h3{font-family:'Syne','Hind Siliguri',sans-serif;font-size:17px;font-weight:600;margin-bottom:4px}
+        .conn-card p{font-size:13px;color:var(--text-secondary);line-height:1.45;margin-bottom:12px;font-weight:300}
+        .conn-arrow{font-family:'Fira Code',monospace;font-size:12px;color:var(--primary);font-weight:500;display:flex;align-items:center;gap:6px}
+        .conn-foot{text-align:center;padding:28px 0;border-top:1px solid var(--border)}
+        .conn-foot p{font-size:13px;color:var(--text-muted)}
+        .conn-foot .hrt{color:var(--accent);display:inline-block;animation:hrtB 1.4s ease-in-out infinite}
+        @keyframes hrtB{0%,100%{transform:scale(1)}50%{transform:scale(1.22)}}
+        .conn-foot small{display:block;font-size:10px;color:var(--text-muted);margin-top:5px;opacity:.55}
+
+        /* ===== BOTTOM NAV ===== */
+        .bnav{
+            position:fixed;bottom:0;left:0;width:100%;height:68px;
+            background:var(--bg-nav);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+            border-top:1px solid var(--border);display:flex;align-items:center;
+            justify-content:space-around;z-index:100;padding:0 6px;
+            padding-bottom:env(safe-area-inset-bottom,0);
+        }
+        .bnav-btn{
+            flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+            padding:8px 0;background:none;border:none;cursor:pointer;
+            color:var(--text-muted);transition:color .25s;
+            font-family:'Hind Siliguri','Lexend',sans-serif;
+            -webkit-tap-highlight-color:transparent;position:relative;
+        }
+        .bnav-btn.on{color:var(--primary)}
+        .bnav-btn i{font-size:17px;transition:transform .25s}
+        .bnav-btn.on i{transform:translateY(-2px)}
+        .bnav-btn span{font-size:10px;font-weight:600;letter-spacing:.3px}
+        .bnav-btn .nd{position:absolute;top:3px;width:4px;height:4px;border-radius:50%;background:var(--primary);opacity:0;transition:opacity .25s}
+        .bnav-btn.on .nd{opacity:1}
+        .bnav-btn.admin-action{color:var(--primary);opacity:.55}
+        .bnav-btn.admin-action:active{opacity:1}
+
+        /* ===== ADMIN PANEL ===== */
+        .adm-overlay{position:fixed;inset:0;background:var(--overlay-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:500;display:none}
+        .adm-overlay.on{display:block;animation:fadBk .25s ease}
+        @keyframes fadBk{from{opacity:0}to{opacity:1}}
+        .adm-panel{
+            position:fixed;top:0;right:0;width:100%;max-width:440px;height:100%;
+            background:var(--bg-primary);z-index:501;transform:translateX(100%);
+            transition:transform .4s cubic-bezier(.16,1,.3,1);overflow-y:auto;
+            padding:22px 18px 40px;box-shadow:-6px 0 36px rgba(0,0,0,.08);
+        }
+        .dark .adm-panel{box-shadow:-6px 0 36px rgba(0,0,0,.35)}
+        .adm-panel.on{transform:translateX(0)}
+        .adm-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+        .adm-bar h2{font-family:'Syne','Hind Siliguri',sans-serif;font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px}
+        .adm-bar h2 i{color:var(--primary);font-size:18px}
+        .adm-x{
+            width:36px;height:36px;border-radius:10px;border:1px solid var(--border);
+            background:var(--bg-surface);color:var(--text-secondary);
+            display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:transform .2s;
+        }
+        .adm-x:active{transform:scale(.88)}
+        .adm-login{padding:14px 0}
+        .adm-login-ico{
+            width:60px;height:60px;border-radius:16px;background:var(--primary-glow);
+            display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;color:var(--primary);
+        }
+        .adm-login h3{font-family:'Syne','Hind Siliguri',sans-serif;font-size:20px;font-weight:600;text-align:center;margin-bottom:4px}
+        .adm-login .sub-l{text-align:center;font-size:13px;color:var(--text-secondary);margin-bottom:22px}
+        .fg{margin-bottom:14px}
+        .fg label{display:block;font-family:'Fira Code',monospace;font-size:11px;font-weight:500;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+        .fg input{
+            width:100%;padding:13px 14px;font-size:16px;font-family:'Lexend','Hind Siliguri',sans-serif;
+            background:var(--bg-surface);color:var(--text-primary);
+            border:1px solid var(--border);border-radius:12px;outline:none;transition:border-color .25s,box-shadow .25s;
+        }
+        .fg input::placeholder{color:var(--text-muted)}
+        .fg input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-glow)}
+        .btn-p{
+            width:100%;padding:14px;font-size:15px;font-weight:600;
+            font-family:'Lexend','Hind Siliguri',sans-serif;background:var(--primary);color:#fff;
+            border:none;border-radius:12px;cursor:pointer;transition:transform .2s,opacity .2s;
+            display:flex;align-items:center;justify-content:center;gap:8px;
+        }
+        .btn-p:active{transform:scale(.98);opacity:.88}
+        .adm-dash{display:none}.adm-dash.on{display:block}
+        .adm-logv{display:block}.adm-logv.hid{display:none}
+        .adm-hr{border:none;border-top:1px solid var(--border);margin:26px 0}
+        .adm-stitle{font-family:'Syne','Hind Siliguri',sans-serif;font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+        .adm-stitle i{color:var(--primary);font-size:13px}
+        .adm-plist{max-height:280px;overflow-y:auto;margin-top:12px}
+        .adm-plist::-webkit-scrollbar{width:3px}
+        .adm-plist::-webkit-scrollbar-thumb{background:var(--primary-glow);border-radius:3px}
+        .adm-pi{
+            display:flex;align-items:center;justify-content:space-between;
+            padding:12px;background:var(--bg-surface);border:1px solid var(--border);
+            border-radius:12px;margin-bottom:8px;transition:transform .2s;
+        }
+        .adm-pi:active{transform:scale(.99)}
+        .adm-pi-info strong{font-size:13px;font-weight:600;display:block}
+        .adm-pi-info small{font-size:11px;color:var(--text-muted)}
+        .adm-pi-acts{display:flex;gap:5px}
+        .adm-pi-acts button{
+            width:32px;height:32px;border:1px solid var(--border);border-radius:8px;
+            background:var(--bg-elevated);color:var(--text-secondary);cursor:pointer;
+            display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;
+        }
+        .adm-pi-acts button:active{transform:scale(.88)}
+        .adm-pi-acts .eb:active{color:#3B82F6;border-color:#3B82F6}
+        .adm-pi-acts .db:active{color:var(--accent);border-color:var(--accent)}
+
+        /* ===== MODALS ===== */
+        .m-back{
+            position:fixed;inset:0;background:var(--overlay-bg);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+            display:none;align-items:center;justify-content:center;z-index:600;padding:18px;
+        }
+        .m-back.on{display:flex;animation:fadBk .22s ease}
+        .m-box{
+            background:var(--bg-surface);border:1px solid var(--border);border-radius:20px;
+            padding:26px 22px;width:100%;max-width:340px;text-align:center;
+            box-shadow:var(--shadow-lg);animation:mIn .32s cubic-bezier(.16,1,.3,1);
+        }
+        @keyframes mIn{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}
+        .m-box h3{font-family:'Syne','Hind Siliguri',sans-serif;font-size:17px;font-weight:600;margin-bottom:8px}
+        .m-box p{font-size:14px;color:var(--text-secondary);margin-bottom:22px;line-height:1.5}
+        .m-acts{display:flex;gap:10px}
+        .m-acts button{flex:1;padding:13px;font-size:14px;font-weight:600;font-family:'Lexend','Hind Siliguri',sans-serif;border-radius:12px;cursor:pointer;transition:transform .2s}
+        .m-acts button:active{transform:scale(.96)}
+        .m-acts .mc{background:var(--bg-elevated);color:var(--text-secondary);border:1px solid var(--border)}
+        .m-acts .mk{background:var(--primary);color:#fff;border:none;box-shadow:0 4px 14px var(--primary-glow)}
+        .m-acts .md{background:#EF4444;color:#fff;border:none}
+
+        /* ===== APP VIEWER ===== */
+        #app-viewer{position:fixed;inset:0;background:var(--bg-primary);z-index:700;display:none;flex-direction:column}
+        #app-viewer.on{display:flex;animation:vIn .35s ease}
+        @keyframes vIn{from{transform:translateX(100%)}to{transform:none}}
+        .v-head{
+            display:flex;align-items:center;justify-content:space-between;padding:14px 18px;
+            background:var(--primary);color:#fff;font-family:'Syne','Hind Siliguri',sans-serif;font-weight:700;font-size:15px;
+        }
+        .v-head-left{display:flex;align-items:center;gap:10px;cursor:pointer;transition:opacity .2s}
+        .v-head-left:active{opacity:.7}
+        .v-newtab{
+            color:#fff;text-decoration:none;width:36px;height:36px;border-radius:8px;
+            display:flex;align-items:center;justify-content:center;
+            background:rgba(255,255,255,0.15);transition:background .2s;font-size:14px;
+        }
+        .v-newtab:active{background:rgba(255,255,255,0.3)}
+        .v-body{position:relative;flex:1;overflow:auto}
+        .v-loader{
+            position:absolute;inset:0;display:flex;flex-direction:column;
+            align-items:center;justify-content:center;gap:14px;
+            background:var(--bg-primary);z-index:2;transition:opacity .3s;
+        }
+        .v-loader.gone{opacity:0;pointer-events:none}
+        .v-spinner{
+            width:40px;height:40px;border-radius:50%;
+            border:3px solid var(--border);border-top-color:var(--primary);
+            animation:spin 1s linear infinite;
+        }
+        .v-loader p{font-size:14px;color:var(--text-secondary);font-weight:400}
+        .v-loader .v-fallback{display:none;margin-top:10px;text-align:center}
+        .v-loader .v-fallback.show{display:block}
+        .v-loader .v-fallback p{font-size:13px;color:var(--text-muted);margin-bottom:10px}
+        .v-loader .v-fallback-btn{
+            display:inline-flex;align-items:center;gap:6px;padding:10px 20px;
+            background:var(--primary);color:#fff;border:none;border-radius:10px;
+            font-family:'Lexend','Hind Siliguri',sans-serif;font-size:14px;font-weight:500;
+            cursor:pointer;text-decoration:none;transition:transform .2s;
+        }
+        .v-loader .v-fallback-btn:active{transform:scale(.96)}
+        #app-frame{flex:1;border:none;width:100%;height:100%;position:relative;z-index:1}
+
+        /* ===== TOAST ===== */
+        .t-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none;display:flex;flex-direction:column;gap:7px;align-items:center}
+        .t-item{
+            background:var(--toast-bg);color:var(--toast-text);padding:12px 20px;
+            border-radius:12px;font-size:14px;font-weight:500;box-shadow:var(--shadow-md);
+            border:1px solid var(--border);pointer-events:auto;
+            animation:tIn .28s ease,tOut .28s ease 2.7s forwards;
+        }
+        .t-item.success{border-left:3px solid var(--accent)}
+        .t-item.error{border-left:3px solid #EF4444}
+        @keyframes tIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+        @keyframes tOut{from{opacity:1}to{opacity:0;transform:translateY(-10px)}}
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:360px){
+            .p-grid{gap:10px}.p-card{padding:16px 8px}
+            .proj-head h2,.conn-head h2{font-size:22px}
+            .stats-row{gap:7px}.s-card{padding:10px 4px}.s-val{font-size:18px}
+        }
+        @media(min-width:768px){
+            .bnav{max-width:480px;left:50%;transform:translateX(-50%);border-radius:18px 18px 0 0}
+            .p-grid{grid-template-columns:repeat(3,1fr)}
         }
     </style>
 </head>
 <body>
 
-    <!-- PARTICLE BACKGROUND -->
-    <canvas id="particles-canvas"></canvas>
+<!-- Splash -->
+<div id="splash">
+    <div class="spl-ring"><i class="fas fa-code"></i></div>
+    <div class="spl-name">ADNAN DEV</div>
+    <div class="spl-bar"><div class="spl-bar-fill"></div></div>
+</div>
 
-    <!-- TOAST CONTAINER -->
-    <div class="toast-container" id="toast-container"></div>
+<!-- Background layers -->
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid"></div>
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
 
-    <!-- HEADER -->
-    <header>
-        <div class="header-live-bg"></div>
+<!-- Toast -->
+<div class="t-wrap" id="toast-wrap"></div>
 
-        <div class="profile-wrapper">
-            <div class="profile-glow"></div>
-            <div class="profile-ring"></div>
-            <img id="profile-img-element" src="https://i.ibb.co/Cpx8YJr/IMG-20260227-161602-397.jpg" alt="ADNAN RDX" class="profile-img">
-            <div class="verified-container">
-                <div class="verified-spin-ring"></div>
-                <div class="verified-badge"><i class="fas fa-check" style="font-size:11px;"></i></div>
+<!-- ============ MAIN ============ -->
+<div class="app-shell">
+    <!-- HOME -->
+    <section id="sec-home" class="section active">
+        <div class="home-center">
+            <div class="avatar-wrap">
+                <img id="profile-image" src="https://i.ibb.co.com/Cpx8YJrY/IMG-20260227-161602-397.jpg" alt="ADNAN RDX" class="avatar">
+                <div class="badge-v"><i class="fas fa-check" style="font-size:11px"></i></div>
+            </div>
+            <h1 class="home-name">
+                <span id="profile-name-text">ADNAN RDX</span>
+                <span class="mini-badge"><i class="fas fa-check" style="font-size:9px"></i></span>
+            </h1>
+            <p class="home-sub">ADNAN DEV PROJECT LIST</p>
+            <p class="home-tag">&#9889; Building the future, one project at a time</p>
+            <div class="home-bio">Full Stack Developer specializing in web applications, innovative tools, and premium projects. Passionate about technology and creating impactful solutions.</div>
+            <div class="home-skills">
+                <span class="skill-tag">Web Development</span>
+                <span class="skill-tag">Full Stack</span>
+                <span class="skill-tag">Innovation</span>
+                <span class="skill-tag">Firebase</span>
+                <span class="skill-tag">JavaScript</span>
             </div>
         </div>
-
-        <div class="name-container">
-            <h1 id="profile-name">ADNAN RDX <span class="inline-badge"><i class="fas fa-check" style="font-size:10px;"></i></span></h1>
+        <div class="stats-row">
+            <div class="s-card"><div class="s-val" id="stat-projects">0</div><div class="s-key">Projects</div></div>
+            <div class="s-card"><div class="s-val">24/7</div><div class="s-key">Active</div></div>
+            <div class="s-card"><div class="s-val">&#9733;</div><div class="s-key">Premium</div></div>
         </div>
-        <p class="sub-title">ADNAN DEV PROJECT LIST</p>
-        <p class="tagline">&#9889; Building the future, one project at a time</p>
+        <div class="marquee-bar">
+            <div class="marquee-track">
+                <span>&#10070; ADNAN RDX DEV</span><span>&#10070; Premium Projects</span>
+                <span>&#10070; Web Development</span><span>&#10070; Full Stack</span><span>&#10070; Innovation</span>
+                <span>&#10070; ADNAN RDX DEV</span><span>&#10070; Premium Projects</span>
+                <span>&#10070; Web Development</span><span>&#10070; Full Stack</span><span>&#10070; Innovation</span>
+            </div>
+        </div>
+    </section>
 
-        <!-- SOCIAL BUTTONS -->
-        <div class="social-buttons">
-            <a href="https://t.me/ProEarningCommunity" target="_blank" class="social-btn social-btn-telegram">
-                <i class="fab fa-telegram-plane"></i>
-                <span>Join Channel</span>
+    <!-- PROJECTS -->
+    <section id="sec-projects" class="section">
+        <div class="proj-head">
+            <div><div class="sec-label">// projects</div><h2>My Projects</h2></div>
+            <span class="proj-badge" id="proj-count-badge">0 items</span>
+        </div>
+        <div class="p-grid stagger" id="project-grid">
+            <div class="skel"><div class="skel-c"></div><div class="skel-l w6"></div><div class="skel-l w8"></div></div>
+            <div class="skel"><div class="skel-c"></div><div class="skel-l w6"></div><div class="skel-l w8"></div></div>
+            <div class="skel"><div class="skel-c"></div><div class="skel-l w6"></div><div class="skel-l w8"></div></div>
+            <div class="skel"><div class="skel-c"></div><div class="skel-l w6"></div><div class="skel-l w8"></div></div>
+        </div>
+    </section>
+
+    <!-- CONNECT -->
+    <section id="sec-connect" class="section">
+        <div class="conn-head"><div class="sec-label">// connect</div><h2>Let's Connect</h2></div>
+        <div class="conn-cards">
+            <a id="telegram-card" href="https://t.me/ProEarningCommunity" target="_blank" class="conn-card">
+                <div class="conn-icon tg"><i class="fab fa-telegram-plane"></i></div>
+                <h3>Telegram Channel</h3>
+                <p>Join our community for updates, new projects, and exclusive content.</p>
+                <span class="conn-arrow">Join now <i class="fas fa-arrow-right" style="font-size:11px"></i></span>
             </a>
-            <a href="https://t.me/TrutedStarBD" target="_blank" class="social-btn social-btn-dev">
-                <i class="fas fa-code"></i>
-                <span>Developer</span>
+            <a id="developer-card" href="https://t.me/TrutedStarBD" target="_blank" class="conn-card">
+                <div class="conn-icon dev"><i class="fas fa-code"></i></div>
+                <h3>Developer</h3>
+                <p>Want to work together or have questions? Reach out directly.</p>
+                <span class="conn-arrow">Contact <i class="fas fa-arrow-right" style="font-size:11px"></i></span>
             </a>
         </div>
-
-        <!-- STATS -->
-        <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-number" id="stat-projects">0</div>
-                <div class="stat-label">Projects</div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Active</div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <div class="stat-number">&#9733;</div>
-                <div class="stat-label">Premium</div>
-            </div>
+        <div class="conn-foot">
+            <p>Made with <span class="hrt">&#10084;</span> by ADNAN RDX</p>
+            <small>&copy; 2026 All Rights Reserved</small>
         </div>
-    </header>
+    </section>
+</div>
 
-    <!-- MARQUEE -->
-    <div class="marquee-wrapper">
-        <div class="marquee-content">
-            <span>&#10070; ADNAN RDX DEV</span>
-            <span>&#10070; Premium Projects</span>
-            <span>&#10070; Web Development</span>
-            <span>&#10070; Full Stack</span>
-            <span>&#10070; Innovation</span>
-            <span>&#10070; ADNAN RDX DEV</span>
-            <span>&#10070; Premium Projects</span>
-            <span>&#10070; Web Development</span>
-            <span>&#10070; Full Stack</span>
-            <span>&#10070; Innovation</span>
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+    <button class="bnav-btn on" data-sec="sec-home"><div class="nd"></div><i class="fas fa-home"></i><span>&#2489;&#2507;&#2478;</span></button>
+    <button class="bnav-btn" data-sec="sec-projects"><div class="nd"></div><i class="fas fa-th-large"></i><span>&#2474;&#2509;&#2480;&#2460;&#2503;&#2453;&#2509;&#2463;</span></button>
+    <button class="bnav-btn" data-sec="sec-connect"><div class="nd"></div><i class="fas fa-link"></i><span>&#2453;&#2494;&#2472;&#2503;&#2453;&#2509;&#2463;</span></button>
+    <button class="bnav-btn admin-action" id="nav-admin-btn"><div class="nd"></div><i class="fas fa-shield-alt"></i><span>&#2437;&#2509;&#2479;&#2494;&#2465;&#2478;&#2495;&#2472;</span></button>
+</nav>
+
+<!-- ADMIN -->
+<div class="adm-overlay" id="adm-overlay"></div>
+<div class="adm-panel" id="adm-panel">
+    <div class="adm-bar">
+        <h2><i class="fas fa-terminal"></i> Admin</h2>
+        <button class="adm-x" id="adm-close-btn"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="adm-logv" id="adm-logv">
+        <div class="adm-login">
+            <div class="adm-login-ico"><i class="fas fa-lock"></i></div>
+            <h3>Admin Login</h3>
+            <p class="sub-l">Enter your credentials to continue</p>
+            <div class="fg"><label>Email</label><input type="email" id="adm-email" placeholder="Enter email"></div>
+            <div class="fg"><label>Password</label><input type="password" id="adm-pass" placeholder="Enter password"></div>
+            <button class="btn-p" id="adm-login-btn"><i class="fas fa-arrow-right"></i> Login</button>
         </div>
     </div>
+    <div class="adm-dash" id="adm-dash">
+        <div class="adm-stitle"><i class="fas fa-plus-circle"></i> <span id="proj-form-title">Add Project</span></div>
+        <div class="fg"><label>Project Name</label><input type="text" id="adm-p-name" placeholder="e.g. My Web App"></div>
+        <div class="fg"><label>Description</label><input type="text" id="adm-p-desc" placeholder="e.g. Awesome Tool"></div>
+        <div class="fg"><label>Project Link</label><input type="text" id="adm-p-link" placeholder="https://..."></div>
+        <div class="fg"><label>Image URL (Optional)</label><input type="text" id="adm-p-img" placeholder="https://..."></div>
+        <button class="btn-p" id="adm-save-btn"><i class="fas fa-plus-circle"></i> <span id="save-btn-text">Add Project</span></button>
+        <hr class="adm-hr">
+        <div class="adm-stitle"><i class="fas fa-list"></i> Existing Projects</div>
+        <div class="adm-plist" id="adm-plist"></div>
+        <hr class="adm-hr">
+        <div class="adm-stitle"><i class="fas fa-cog"></i> Profile &amp; Credentials</div>
+        <div class="fg"><label>Profile Name</label><input type="text" id="set-name" placeholder="ADNAN RDX"></div>
+        <div class="fg"><label>Telegram Link</label><input type="text" id="set-tg" placeholder="https://t.me/ProEarningCommunity"></div>
+        <div class="fg"><label>Developer Link</label><input type="text" id="set-dev" placeholder="https://t.me/TrutedStarBD"></div>
+        <div class="fg"><label>Profile Image URL (ImgBB)</label><input type="text" id="set-img" placeholder="https://i.ibb.co/..."></div>
+        <div class="fg"><label>New Admin Email</label><input type="email" id="set-email" placeholder="xyz@gmail.com"></div>
+        <div class="fg"><label>New Admin Password</label><input type="password" id="set-pass" placeholder="Enter new password"></div>
+        <button class="btn-p" id="set-save-btn"><i class="fas fa-save"></i> Update Settings</button>
+        <div style="height:30px"></div>
+    </div>
+</div>
 
-    <!-- MAIN CONTENT -->
-    <div class="container">
-        <div class="section-title">My Projects</div>
-
-        <div class="project-grid" id="main-project-grid">
-            <!-- SKELETON LOADING -->
-            <div class="skeleton-card"><div class="skeleton-circle"></div><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div></div>
-            <div class="skeleton-card"><div class="skeleton-circle"></div><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div></div>
-            <div class="skeleton-card"><div class="skeleton-circle"></div><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div></div>
-            <div class="skeleton-card"><div class="skeleton-circle"></div><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div></div>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="footer-banner">
-            <p>Made with <span class="heart">&#10084;</span> by ADNAN RDX</p>
-            <p style="margin-top:4px; font-size:10px; color:rgba(255,255,255,0.2);">&#169; 2026 All Rights Reserved</p>
+<!-- PROJECT MODAL -->
+<div class="m-back" id="proj-modal">
+    <div class="m-box">
+        <h3 id="pm-name">Project</h3>
+        <p>&#2438;&#2474;&#2472;&#2495; &#2453;&#2495; &#2447;&#2439; &#2474;&#2509;&#2480;&#2460;&#2503;&#2453;&#2509;&#2463;&#2463;&#2495; &#2458;&#2494;&#2482;&#2497; &#2453;&#2480;&#2468;&#2503; &#2458;&#2494;&#2472;?</p>
+        <div class="m-acts">
+            <button class="mc" id="pm-cancel">Cancel</button>
+            <button class="mk" id="pm-start">Start <i class="fas fa-rocket"></i></button>
         </div>
     </div>
+</div>
 
-    <!-- ADMIN BUTTON -->
-    <button id="admin-access-btn" onclick="openAdminLogin()">
-        <i class="fas fa-shield-alt"></i> Admin
-    </button>
-
-    <!-- MODALS -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <h2 id="p-title" style="font-size: 17px;">Project Name</h2>
-            <p style="margin-top: 10px; font-size: 13px;">আপনি কি এই প্রজেক্টটি চালু করতে চান?</p>
-            <div class="modal-btns">
-                <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
-                <button class="btn btn-start" id="confirm-btn">
-                    <span style="position:relative;z-index:1;">Start <i class="fas fa-rocket" style="margin-left:4px;"></i></span>
-                </button>
+<!-- APP VIEWER -->
+<div id="app-viewer">
+    <div class="v-head">
+        <div class="v-head-left" id="viewer-back"><i class="fas fa-chevron-left"></i> <span>Back</span></div>
+        <a id="viewer-newtab" href="#" target="_blank" class="v-newtab"><i class="fas fa-external-link-alt"></i></a>
+    </div>
+    <div class="v-body">
+        <div class="v-loader" id="viewer-loader">
+            <div class="v-spinner"></div>
+            <p>Loading project...</p>
+            <div class="v-fallback" id="viewer-fallback">
+                <p>&#2474;&#2509;&#2480;&#2460;&#2503;&#2453;&#2509;&#2463; &#2482;&#2507;&#2465; &#2489;&#2458;&#2509;&#2459;&#2503; &#2472;&#2494;? &#2472;&#2468;&#2497;&#2472; &#2463;&#2509;&#2479;&#2494;&#2476;&#2503; &#2454;&#2507;&#2482;&#2497;&#2472;</p>
+                <a id="viewer-fallback-link" href="#" target="_blank" class="v-fallback-btn"><i class="fas fa-external-link-alt"></i> Open in new tab</a>
             </div>
         </div>
+        <iframe src="" id="app-frame" scrolling="yes" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"></iframe>
     </div>
+</div>
 
-    <div class="modal-overlay" id="admin-login-modal">
-        <div class="modal-content">
-            <h2 style="margin-bottom: 20px;" class="admin-panel-title"><i class="fas fa-lock"></i> Admin Login</h2>
-            <div class="admin-form-group">
-                <label>Email</label>
-                <input type="email" id="admin-email" placeholder="Enter your email">
-            </div>
-            <div class="admin-form-group">
-                <label>Password</label>
-                <input type="password" id="admin-pass" placeholder="Enter password">
-            </div>
-            <div class="modal-btns">
-                <button class="btn btn-cancel" onclick="closeAdminLogin()">Cancel</button>
-                <button class="btn btn-start" onclick="handleLogin()">
-                    <span style="position:relative;z-index:1;">Login <i class="fas fa-arrow-right" style="margin-left:4px;"></i></span>
-                </button>
-            </div>
-        </div>
-    </div>
+<script>
+/* ================================================================
+   DARK MODE
+================================================================ */
+if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.classList.add('dark')}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){
+    if(e.matches){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}
+});
 
-    <div class="modal-overlay" id="admin-panel-modal" style="align-items: flex-start; padding-top: 30px;">
-        <div class="modal-content" style="max-width: 460px; width: 92%; padding-bottom: 20px; max-height: 90vh; overflow-y: auto;">
-            <button class="admin-close-btn" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
-            <div class="admin-panel-title"><i class="fas fa-terminal"></i> Dashboard</div>
-            <div class="admin-form-group">
-                <label>Project Name</label>
-                <input type="text" id="admin-name" placeholder="e.g. My Web App">
-            </div>
-            <div class="admin-form-group">
-                <label>Description</label>
-                <input type="text" id="admin-desc" placeholder="e.g. Awesome Tool">
-            </div>
-            <div class="admin-form-group">
-                <label>Project Link</label>
-                <input type="text" id="admin-link" placeholder="https://...">
-            </div>
-            <div class="admin-form-group">
-                <label>Image URL (Optional)</label>
-                <input type="text" id="admin-img" placeholder="https://...">
-            </div>
-            <button class="btn-admin-submit" id="admin-submit-btn" onclick="saveProject()">
-                <i class="fas fa-plus-circle" style="margin-right:6px;"></i> Add Project
-            </button>
-            <div class="admin-form-group" style="margin-top: 20px;">
-                <label>Profile Name</label>
-                <input type="text" id="admin-profile-name" placeholder="e.g. ADNAN RDX">
-            </div>
-            <div class="admin-form-group">
-                <label>Profile Image URL</label>
-                <input type="text" id="admin-profile-img" placeholder="https://i.ibb.co/...">
-            </div>
-            <button class="btn-admin-submit" onclick="saveProfileConfig()">
-                <i class="fas fa-save" style="margin-right:6px;"></i> Save Profile
-            </button>
-            <div class="admin-form-group" style="margin-top: 20px;">
-                <label>New Admin Email</label>
-                <input type="email" id="admin-new-email" placeholder="New email">
-            </div>
-            <div class="admin-form-group">
-                <label>New Admin Password</label>
-                <input type="password" id="admin-new-pass" placeholder="New password">
-            </div>
-            <button class="btn-admin-submit" onclick="saveAdminCredentials()">
-                <i class="fas fa-key" style="margin-right:6px;"></i> Update Credentials
-            </button>
-            <div class="project-list-admin" id="admin-list-container"></div>
-        </div>
-    </div>
+/* ================================================================
+   SPLASH SCREEN
+================================================================ */
+setTimeout(function(){document.getElementById('splash').classList.add('gone')},2000);
 
-    <!-- APP VIEWER -->
-    <div id="app-viewer">
-        <div class="viewer-header" onclick="closeApp()">
-            <i class="fas fa-chevron-left"></i> <span>Back to Home</span>
-        </div>
-        <iframe id="app-frame" allow="camera; microphone; clipboard-read; clipboard-write;"></iframe>
-    </div>
+/* ================================================================
+   PARTICLE CANVAS BACKGROUND
+================================================================ */
+(function(){
+    var canvas=document.getElementById('bg-canvas');
+    var ctx=canvas.getContext('2d');
+    var particles=[];
+    var PCOUNT=window.innerWidth<768?30:55;
+    var MAX_DIST=130;
+    var MAX_DIST_SQ=MAX_DIST*MAX_DIST;
+    var W,H;
 
-    <script>
-        /* ======================================================
-           PARTICLE BACKGROUND
-        ====================================================== */
-        (function initParticles() {
-            const canvas = document.getElementById('particles-canvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            const PARTICLE_COUNT = 50;
+    function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+    resize();
+    window.addEventListener('resize',resize);
 
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
+    function Particle(){
+        this.x=Math.random()*W;this.y=Math.random()*H;
+        this.vx=(Math.random()-0.5)*0.4;this.vy=(Math.random()-0.5)*0.4;
+        this.r=Math.random()*1.8+0.6;
+    }
 
-            function createParticle() {
-                return {
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    r: Math.random() * 2 + 0.5,
-                    alpha: Math.random() * 0.4 + 0.1
-                };
-            }
+    for(var i=0;i<PCOUNT;i++){particles.push(new Particle())}
 
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
-                particles.push(createParticle());
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    if (p.x < 0) p.x = canvas.width;
-                    if (p.x > canvas.width) p.x = 0;
-                    if (p.y < 0) p.y = canvas.height;
-                    if (p.y > canvas.height) p.y = 0;
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(76, 175, 80, ' + p.alpha + ')';
-                    ctx.fill();
-                });
-
-                // draw connections
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = 'rgba(76, 175, 80, ' + (0.08 * (1 - dist / 120)) + ')';
-                            ctx.lineWidth = 0.5;
-                            ctx.stroke();
-                        }
-                    }
-                }
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })();
-
-        /* ======================================================
-           CUSTOM TOAST (replaces alert)
-        ====================================================== */
-        function showToast(message, type) {
-            type = type || 'error';
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'toast ' + type;
-            toast.textContent = message;
-            container.appendChild(toast);
-            setTimeout(function() {
-                if (toast.parentNode) toast.parentNode.removeChild(toast);
-            }, 3000);
-        }
-
-        /* ======================================================
-           CUSTOM CONFIRM DIALOG (replaces confirm)
-        ====================================================== */
-        function showConfirmDialog(message, onConfirm) {
-            const overlay = document.createElement('div');
-            overlay.className = 'confirm-dialog-overlay';
-            overlay.innerHTML =
-                '<div class="confirm-dialog">' +
-                    '<p>' + message + '</p>' +
-                    '<div class="confirm-btns">' +
-                        '<button class="btn btn-cancel" id="confirm-no">Cancel</button>' +
-                        '<button class="btn btn-start" id="confirm-yes"><span style="position:relative;z-index:1;">Confirm</span></button>' +
-                    '</div>' +
-                '</div>';
-            document.body.appendChild(overlay);
-            overlay.querySelector('#confirm-no').onclick = function() {
-                document.body.removeChild(overlay);
-            };
-            overlay.querySelector('#confirm-yes').onclick = function() {
-                document.body.removeChild(overlay);
-                onConfirm();
-            };
-        }
-
-        /* ======================================================
-           FIREBASE CONFIGURATION
-        ====================================================== */
-        var firebaseConfig = {
-            apiKey: "AIzaSyBBbmedW1kPKNXmmz3apuphXIV0Ez0BpzA",
-            authDomain: "adnanproject-22be5.firebaseapp.com",
-            projectId: "adnanproject-22be5",
-            storageBucket: "adnanproject-22be5.firebasestorage.app",
-            messagingSenderId: "651952824209",
-            appId: "1:651952824209:web:22fd7739149a2b6415c430",
-            measurementId: "G-S8G4L7PEH7"
+    function getColors(){
+        var dark=document.documentElement.classList.contains('dark');
+        return{
+            dot:dark?'rgba(51,153,255,0.55)':'rgba(0,102,255,0.3)',
+            lineBase:dark?[51,153,255]:[0,102,255],
+            lineAlpha:dark?0.14:0.08
         };
+    }
 
-        firebase.initializeApp(firebaseConfig);
-        var db = firebase.firestore();
+    function frame(){
+        ctx.clearRect(0,0,W,H);
+        var c=getColors();
+        var p,q,dx,dy,dSq,al;
 
-        /* ======================================================
-           APP LOGIC
-        ====================================================== */
-        var targetUrl = "";
+        for(i=0;i<particles.length;i++){
+            p=particles[i];
+            p.x+=p.vx;p.y+=p.vy;
+            if(p.x<0||p.x>W)p.vx*=-1;
+            if(p.y<0||p.y>H)p.vy*=-1;
 
-        function askToOpen(name, url) {
-            targetUrl = url;
-            document.getElementById('p-title').innerText = name;
-            var modal = document.getElementById('modal');
-            modal.style.display = 'flex';
-            modal.classList.add('active');
-        }
+            ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);
+            ctx.fillStyle=c.dot;ctx.fill();
 
-        function closeModal() {
-            var modal = document.getElementById('modal');
-            modal.classList.remove('active');
-            modal.style.display = 'none';
-        }
-
-        document.getElementById('confirm-btn').onclick = function() {
-            closeModal();
-            const frame = document.getElementById('app-frame');
-            frame.src = targetUrl;
-            frame.onload = () => {
-                // Success
-            };
-            frame.onerror = () => {
-                showToast("প্রজেক্ট লোড হয়নি, লিঙ্ক চেক করুন বা পরে চেষ্টা করুন।", "error");
-                closeApp();
-            };
-            var viewer = document.getElementById('app-viewer');
-            viewer.style.display = 'flex';
-            viewer.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-
-        function closeApp() {
-            var viewer = document.getElementById('app-viewer');
-            viewer.classList.remove('active');
-            viewer.style.display = 'none';
-            document.getElementById('app-frame').src = "";
-            document.body.style.overflow = 'auto';
-        }
-
-        /* ======================================================
-           ADMIN LOGIN
-        ====================================================== */
-        function openAdminLogin() {
-            var modal = document.getElementById('admin-login-modal');
-            modal.style.display = 'flex';
-            modal.classList.add('active');
-        }
-
-        function closeAdminLogin() {
-            var modal = document.getElementById('admin-login-modal');
-            modal.classList.remove('active');
-            modal.style.display = 'none';
-            document.getElementById('admin-email').value = "";
-            document.getElementById('admin-pass').value = "";
-        }
-
-        async function handleLogin() {
-            var email = document.getElementById('admin-email').value;
-            var pass = document.getElementById('admin-pass').value;
-            const configRef = db.collection("config").doc("admin");
-            const doc = await configRef.get();
-            if (doc.exists) {
-                const data = doc.data();
-                if (email === data.email && pass === data.password) {
-                    closeAdminLogin();
-                    openAdminPanel();
-                    return;
+            for(var j=i+1;j<particles.length;j++){
+                q=particles[j];
+                dx=p.x-q.x;dy=p.y-q.y;dSq=dx*dx+dy*dy;
+                if(dSq<MAX_DIST_SQ){
+                    al=(1-dSq/MAX_DIST_SQ)*c.lineAlpha;
+                    ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+                    ctx.strokeStyle='rgba('+c.lineBase[0]+','+c.lineBase[1]+','+c.lineBase[2]+','+al+')';
+                    ctx.lineWidth=0.6;ctx.stroke();
                 }
             }
-            showToast("ভুল ইমেইল অথবা পাসওয়ার্ড!", "error");
         }
+        requestAnimationFrame(frame);
+    }
+    frame();
+})();
 
-        /* ======================================================
-           ADMIN PANEL
-        ====================================================== */
-        var editModeId = null;
-        var editOldIsIcon = false;
-        var editOldIconClass = "";
+/* ================================================================
+   CLICK SOUND (Web Audio)
+================================================================ */
+var audioCtx=null;
+function playClick(){
+    try{
+        if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+        var osc=audioCtx.createOscillator();var g=audioCtx.createGain();
+        osc.connect(g);g.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(700,audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(250,audioCtx.currentTime+0.07);
+        g.gain.setValueAtTime(0.18,audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+0.07);
+        osc.start(audioCtx.currentTime);osc.stop(audioCtx.currentTime+0.07);
+    }catch(e){/* ignore */}
+}
 
-        function openAdminPanel() {
-            var modal = document.getElementById('admin-panel-modal');
-            modal.style.display = 'flex';
-            modal.classList.add('active');
-            loadProfileConfig();
-        }
-
-        function closeAdminPanel() {
-            var modal = document.getElementById('admin-panel-modal');
-            modal.classList.remove('active');
-            modal.style.display = 'none';
-            resetForm();
-        }
-
-        function resetForm() {
-            document.getElementById('admin-name').value = '';
-            document.getElementById('admin-desc').value = '';
-            document.getElementById('admin-link').value = '';
-            document.getElementById('admin-img').value = '';
-            editModeId = null;
-            document.getElementById('admin-submit-btn').innerHTML = '<i class="fas fa-plus-circle" style="margin-right:6px;"></i> Add Project';
-        }
-
-        /* ======================================================
-           FIREBASE CRUD
-        ====================================================== */
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-        }
-
-        async function initDefaultProjects() {
-            try {
-                var snapshot = await db.collection("projects").get();
-                if (snapshot.empty) {
-                    var defaults = [
-                        { name: 'RAMADAN KARIM', desc: 'Wishing Project', link: 'https://ramadanmubarakbro.blogspot.com/', isIcon: true, iconClass: 'fas fa-moon', imageUrl: '' },
-                        { name: 'Tikshorts', desc: 'Short Video Platform', link: 'https://tikshorts-maruf.vercel.app/', isIcon: true, iconClass: 'fab fa-tiktok', imageUrl: '' },
-                        { name: 'FULL WEB SCREENSHOT', desc: 'Web Capture Tool', link: 'https://fullweb-screenshot-adnanrdx.vercel.app/', isIcon: true, iconClass: 'fas fa-camera', imageUrl: '' }
-                    ];
-                    for (var i = 0; i < defaults.length; i++) {
-                        await db.collection("projects").add(defaults[i]);
-                    }
-                }
-                fetchProjects();
-            } catch (error) {
-                console.error("Firestore Init Error:", JSON.stringify(error));
+/* ================================================================
+   NAVIGATION
+================================================================ */
+document.querySelectorAll('.bnav-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+        var id=this.getAttribute('data-sec');
+        if(id){
+            document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active')});
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.bnav-btn').forEach(function(b){b.classList.remove('on')});
+            this.classList.add('on');
+            if(id==='sec-projects'){
+                var g=document.getElementById('project-grid');
+                g.classList.remove('stagger');void g.offsetWidth;g.classList.add('stagger');
             }
+            window.scrollTo(0,0);playClick();
         }
+    });
+});
 
-        async function initDefaultConfig() {
-            const configRef = db.collection("config").doc("admin");
-            const doc = await configRef.get();
-            if (!doc.exists) {
-                await configRef.set({ email: 'xyz@gmail.com', password: 'marufbhai' });
-            }
-            const profileRef = db.collection("config").doc("profile");
-            const profileDoc = await profileRef.get();
-            if (!profileDoc.exists) {
-                await profileRef.set({ name: 'ADNAN RDX', imageUrl: 'https://i.ibb.co/Cpx8YJr/IMG-20260227-161602-397.jpg' });
-            }
+/* ================================================================
+   TOAST
+================================================================ */
+function showToast(msg,type){
+    type=type||'error';
+    var wrap=document.getElementById('toast-wrap');
+    var el=document.createElement('div');el.className='t-item '+type;el.textContent=msg;
+    wrap.appendChild(el);setTimeout(function(){if(el.parentNode)el.remove()},3100);
+}
+
+/* ================================================================
+   CUSTOM CONFIRM DIALOG
+================================================================ */
+function showConfirmDialog(message,onConfirm,isDanger){
+    var bk=document.createElement('div');bk.className='m-back on';
+    bk.innerHTML='<div class="m-box"><p style="margin-bottom:20px">'+message+'</p>'+
+        '<div class="m-acts"><button class="mc" data-role="no">Cancel</button>'+
+        '<button class="'+(isDanger?'md':'mk')+'" data-role="yes">Confirm</button></div></div>';
+    document.body.appendChild(bk);
+    bk.querySelector('[data-role="no"]').onclick=function(){bk.remove()};
+    bk.querySelector('[data-role="yes"]').onclick=function(){bk.remove();onConfirm()};
+}
+
+/* ================================================================
+   FIREBASE
+================================================================ */
+var firebaseConfig={
+    apiKey:"AIzaSyBBbmedW1kPKNXmmz3apuphXIV0Ez0BpzA",
+    authDomain:"adnanproject-22be5.firebaseapp.com",
+    projectId:"adnanproject-22be5",
+    storageBucket:"adnanproject-22be5.firebasestorage.app",
+    messagingSenderId:"651952824209",
+    appId:"1:651952824209:web:22fd7739149a2b6415c430",
+    measurementId:"G-S8G4L7PEH7"
+};
+firebase.initializeApp(firebaseConfig);
+var db=firebase.firestore();
+
+/* ================================================================
+   PROJECT VIEWER
+================================================================ */
+var currentProjectUrl='';
+var viewerTimeout=null;
+
+function openProjectModal(name,url){
+    currentProjectUrl=url;
+    document.getElementById('pm-name').textContent=name;
+    document.getElementById('proj-modal').classList.add('on');
+    playClick();
+}
+
+document.getElementById('pm-cancel').onclick=function(){
+    document.getElementById('proj-modal').classList.remove('on');
+};
+
+document.getElementById('pm-start').onclick=function(){
+    document.getElementById('proj-modal').classList.remove('on');
+    openViewer(currentProjectUrl);
+};
+
+function openViewer(url){
+    var viewer=document.getElementById('app-viewer');
+    var loader=document.getElementById('viewer-loader');
+    var fallback=document.getElementById('viewer-fallback');
+    var frame=document.getElementById('app-frame');
+    var newtab=document.getElementById('viewer-newtab');
+    var fbLink=document.getElementById('viewer-fallback-link');
+
+    loader.classList.remove('gone');
+    fallback.classList.remove('show');
+    newtab.href=url;
+    fbLink.href=url;
+    frame.src=url;
+    viewer.classList.add('on');
+    document.body.style.overflow='hidden';
+
+    if(viewerTimeout)clearTimeout(viewerTimeout);
+
+    frame.onload=function(){
+        setTimeout(function(){loader.classList.add('gone')},400);
+        if(viewerTimeout)clearTimeout(viewerTimeout);
+        checkIframeContent(frame);
+    };
+
+    frame.onerror = function() {
+        fallback.classList.add('show');
+    };
+
+    viewerTimeout=setTimeout(function(){
+        fallback.classList.add('show');
+    },6000);
+};
+
+function checkIframeContent(frame) {
+    try {
+        var doc = frame.contentDocument || frame.contentWindow.document;
+        if (doc && doc.body.innerHTML.trim() === '') {
+            document.getElementById('viewer-fallback').classList.add('show');
         }
+    } catch (e) {
+        document.getElementById('viewer-fallback').classList.add('show');
+    }
+}
 
-        function fetchProjects() {
-            db.collection("projects").onSnapshot(function(snapshot) {
-                var mainGrid = document.getElementById('main-project-grid');
-                var adminList = document.getElementById('admin-list-container');
-                mainGrid.innerHTML = "";
-                adminList.innerHTML = "";
+document.getElementById('viewer-back').onclick=function(){
+    var viewer=document.getElementById('app-viewer');
+    var frame=document.getElementById('app-frame');
+    viewer.classList.remove('on');frame.src='';
+    document.body.style.overflow='';
+    if(viewerTimeout){clearTimeout(viewerTimeout);viewerTimeout=null}
+};
 
-                var count = 0;
-                var docs = [];
-                snapshot.forEach(function(doc) {
-                    docs.push({ id: doc.id, data: doc.data() });
-                });
+/* ================================================================
+   ADMIN PANEL
+================================================================ */
+var isLoggedIn=false;
+var adminEmail='xyz@gmail.com';
+var adminPass='marufbhai';
+var editModeId=null;
+var editOldIsIcon=false;
+var editOldIconClass='';
+var SETTINGS_ID='appSettings';
 
-                count = docs.length;
-                document.getElementById('stat-projects').textContent = count;
+document.getElementById('nav-admin-btn').addEventListener('click',openAdmin);
+document.getElementById('adm-close-btn').addEventListener('click',closeAdmin);
+document.getElementById('adm-overlay').addEventListener('click',closeAdmin);
+document.getElementById('adm-login-btn').addEventListener('click',handleLogin);
+document.getElementById('adm-save-btn').addEventListener('click',saveProject);
+document.getElementById('set-save-btn').addEventListener('click',updateSettings);
 
-                docs.forEach(function(item, index) {
-                    var data = item.data;
-                    var id = item.id;
+function openAdmin(){
+    document.getElementById('adm-overlay').classList.add('on');
+    document.getElementById('adm-panel').classList.add('on');
+    document.body.style.overflow='hidden';
+    if(isLoggedIn){showDash();loadSettingsForm()}
+}
+function closeAdmin(){
+    document.getElementById('adm-overlay').classList.remove('on');
+    document.getElementById('adm-panel').classList.remove('on');
+    document.body.style.overflow='';resetProjForm();
+}
+function handleLogin(){
+    var em=document.getElementById('adm-email').value.trim();
+    var pw=document.getElementById('adm-pass').value.trim();
+    if(em===adminEmail&&pw===adminPass){
+        isLoggedIn=true;showDash();loadSettingsForm();showToast('Login successful!','success');
+    }else{showToast('\u09AD\u09C1\u09B2 \u0987\u09AE\u09C7\u0987\u09B2 \u0985\u09A5\u09AC\u09BE \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1!','error')}
+}
+function showDash(){
+    document.getElementById('adm-logv').classList.add('hid');
+    document.getElementById('adm-dash').classList.add('on');
+}
+function resetProjForm(){
+    document.getElementById('adm-p-name').value='';
+    document.getElementById('adm-p-desc').value='';
+    document.getElementById('adm-p-link').value='';
+    document.getElementById('adm-p-img').value='';
+    editModeId=null;editOldIsIcon=false;editOldIconClass='';
+    document.getElementById('proj-form-title').textContent='Add Project';
+    document.getElementById('save-btn-text').textContent='Add Project';
+}
 
-                    var iconHtml = "";
-                    if (data.imageUrl && data.imageUrl.trim() !== "") {
-                        iconHtml = '<img src="' + escapeHtml(data.imageUrl) + '" alt="Icon">';
-                    } else if (data.isIcon && data.iconClass) {
-                        iconHtml = '<i class="' + escapeHtml(data.iconClass) + '"></i>';
-                    } else {
-                        iconHtml = '<i class="fas fa-folder"></i>';
-                    }
-
-                    var wrapper = document.createElement('div');
-                    wrapper.className = 'card-wrapper';
-                    wrapper.style.animationDelay = (index * 0.1) + 's';
-
-                    var safeName = escapeHtml(data.name);
-                    var safeLink = escapeHtml(data.link);
-                    var safeDesc = escapeHtml(data.desc || 'Project');
-
-                    wrapper.innerHTML =
-                        '<div class="card" onclick="askToOpen(\'' + safeName.replace(/'/g, "\\'") + '\', \'' + safeLink.replace(/'/g, "\\'") + '\')">' +
-                            '<div class="card-shimmer"></div>' +
-                            '<div class="card-pulse-dot"></div>' +
-                            '<div class="icon-box">' + iconHtml + '</div>' +
-                            '<h3>' + safeName + '</h3>' +
-                            '<p>' + safeDesc + '</p>' +
-                        '</div>';
-                    mainGrid.appendChild(wrapper);
-
-                    // Admin list
-                    var adminItem = document.createElement('div');
-                    adminItem.className = 'admin-proj-item';
-                    adminItem.innerHTML =
-                        '<div>' +
-                            '<strong>' + safeName + '</strong><br>' +
-                            '<small>' + safeDesc + '</small>' +
-                        '</div>' +
-                        '<div class="admin-proj-actions">' +
-                            '<button class="btn-edit" data-id="' + id + '"><i class="fas fa-edit"></i></button>' +
-                            '<button class="btn-delete" data-id="' + id + '"><i class="fas fa-trash"></i></button>' +
-                        '</div>';
-
-                    // Attach event listeners properly
-                    var editBtn = adminItem.querySelector('.btn-edit');
-                    var deleteBtn = adminItem.querySelector('.btn-delete');
-
-                    editBtn.addEventListener('click', (function(capturedId, capturedData) {
-                        return function() {
-                            setupEdit(
-                                capturedId,
-                                capturedData.name || '',
-                                capturedData.desc || '',
-                                capturedData.link || '',
-                                capturedData.imageUrl || '',
-                                capturedData.isIcon || false,
-                                capturedData.iconClass || ''
-                            );
-                        };
-                    })(id, data));
-
-                    deleteBtn.addEventListener('click', (function(capturedId) {
-                        return function() {
-                            deleteProject(capturedId);
-                        };
-                    })(id));
-
-                    adminList.appendChild(adminItem);
-                });
-            }, function(error) {
-                console.error("Fetch Error:", JSON.stringify(error));
+/* ================================================================
+   SETTINGS
+================================================================ */
+function loadSettingsForm(){
+    db.collection('settings').doc(SETTINGS_ID).get().then(function(doc){
+        if(doc.exists){
+            var d=doc.data();
+            document.getElementById('set-name').value=d.profileName||'';
+            document.getElementById('set-tg').value=d.telegramLink||'';
+            document.getElementById('set-dev').value=d.developerLink||'';
+            document.getElementById('set-img').value=d.profileImageUrl||'';
+            document.getElementById('set-email').value=d.adminEmail||'';
+            document.getElementById('set-pass').value='';
+        }
+    }).catch(function(e){console.error('loadSettingsForm:',JSON.stringify(e))});
+}
+function initSettings(){
+    db.collection('settings').doc(SETTINGS_ID).get().then(function(doc){
+        if(!doc.exists){
+            db.collection('settings').doc(SETTINGS_ID).set({
+                profileImageUrl:'https://i.ibb.co.com/Cpx8YJrY/IMG-20260227-161602-397.jpg',
+                profileName:'ADNAN RDX',telegramLink:'https://t.me/ProEarningCommunity',
+                developerLink:'https://t.me/TrutedStarBD',
+                adminEmail:'xyz@gmail.com',adminPassword:'marufbhai'
             });
         }
+        applySettings();
+    }).catch(function(e){console.error('initSettings:',JSON.stringify(e))});
+}
+function setProfileImg(url){
+    if(!url)return;var img=document.getElementById('profile-image');
+    var sep=url.indexOf('?')!==-1?'&':'?';img.src=url+sep+'t='+Date.now();
+}
+function applySettings(){
+    db.collection('settings').doc(SETTINGS_ID).get().then(function(doc){
+        if(!doc.exists)return;var d=doc.data();
+        if(d.profileImageUrl)setProfileImg(d.profileImageUrl);
+        if(d.profileName)document.getElementById('profile-name-text').textContent=d.profileName;
+        if(d.telegramLink)document.getElementById('telegram-card').href=d.telegramLink;
+        if(d.developerLink)document.getElementById('developer-card').href=d.developerLink;
+        adminEmail=d.adminEmail||'xyz@gmail.com';adminPass=d.adminPassword||'marufbhai';
+    }).catch(function(e){console.error('applySettings:',JSON.stringify(e))});
+}
+function updateSettings(){
+    var data={};var v;
+    v=document.getElementById('set-name').value.trim();if(v)data.profileName=v;
+    v=document.getElementById('set-tg').value.trim();if(v)data.telegramLink=v;
+    v=document.getElementById('set-dev').value.trim();if(v)data.developerLink=v;
+    v=document.getElementById('set-img').value.trim();if(v)data.profileImageUrl=v;
+    v=document.getElementById('set-email').value.trim();if(v)data.adminEmail=v;
+    v=document.getElementById('set-pass').value.trim();if(v)data.adminPassword=v;
+    if(Object.keys(data).length===0){showToast('\u0995\u09CB\u09A8\u09CB \u09AA\u09B0\u09BF\u09AC\u09B0\u09CD\u09A4\u09A8 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF!','error');return}
+    db.collection('settings').doc(SETTINGS_ID).update(data).then(function(){
+        showToast('Settings updated!','success');
+        if(data.profileImageUrl)setProfileImg(data.profileImageUrl);
+        if(data.profileName)document.getElementById('profile-name-text').textContent=data.profileName;
+        if(data.telegramLink)document.getElementById('telegram-card').href=data.telegramLink;
+        if(data.developerLink)document.getElementById('developer-card').href=data.developerLink;
+        if(data.adminEmail)adminEmail=data.adminEmail;
+        if(data.adminPassword)adminPass=data.adminPassword;
+    }).catch(function(e){showToast('Error: '+e.message,'error')});
+}
 
-        function saveProject() {
-            var name = document.getElementById('admin-name').value.trim();
-            var desc = document.getElementById('admin-desc').value.trim();
-            var link = document.getElementById('admin-link').value.trim();
-            var imageUrl = document.getElementById('admin-img').value.trim();
+/* ================================================================
+   PROJECTS CRUD
+================================================================ */
+function escapeHtml(s){
+    if(!s)return '';
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function initDefaultProjects(){
+    db.collection('projects').get().then(function(snap){
+        if(snap.empty){
+            var defs=[
+                {name:'RAMADAN KARIM',desc:'Wishing Project',link:'https://ramadanmubarakbro.blogspot.com/',isIcon:true,iconClass:'fas fa-moon',imageUrl:''},
+                {name:'Tikshorts',desc:'Short Video Platform',link:'https://tikshorts-maruf.vercel.app/',isIcon:true,iconClass:'fab fa-tiktok',imageUrl:''},
+                {name:'FULL WEB SCREENSHOT',desc:'Web Capture Tool',link:'https://fullweb-screenshot-adnanrdx.vercel.app/',isIcon:true,iconClass:'fas fa-camera',imageUrl:''}
+            ];
+            var chain=Promise.resolve();
+            defs.forEach(function(d){chain=chain.then(function(){return db.collection('projects').add(d)})});
+            chain.then(function(){listenProjects()});
+        }else{listenProjects()}
+    }).catch(function(e){console.error('initDefault:',JSON.stringify(e))});
+}
+function listenProjects(){
+    db.collection('projects').onSnapshot(function(snap){
+        var grid=document.getElementById('project-grid');
+        var list=document.getElementById('adm-plist');
+        grid.innerHTML='';list.innerHTML='';
+        var docs=[];
+        snap.forEach(function(doc){docs.push({id:doc.id,data:doc.data()})});
+        document.getElementById('stat-projects').textContent=docs.length;
+        document.getElementById('proj-count-badge').textContent=docs.length+' items';
 
-            if (!name || !link) {
-                showToast("Project Name এবং Link অবশ্যই দিতে হবে!", "error");
-                return;
-            }
+        docs.forEach(function(item){
+            var d=item.data;var id=item.id;
+            var safeName=escapeHtml(d.name);var safeDesc=escapeHtml(d.desc||'Project');
+            var iconHtml;
+            if(d.imageUrl&&d.imageUrl.trim()!==''){iconHtml='<img src="'+escapeHtml(d.imageUrl)+'" alt="Icon">'}
+            else if(d.isIcon&&d.iconClass){iconHtml='<i class="'+escapeHtml(d.iconClass)+'"></i>'}
+            else{iconHtml='<i class="fas fa-folder"></i>'}
 
-            var projData = { name: name, desc: desc, link: link, imageUrl: imageUrl };
+            var card=document.createElement('div');card.className='p-card';
+            card.innerHTML='<div class="dot-live"></div><div class="p-icon">'+iconHtml+'</div><h3>'+safeName+'</h3><p>'+safeDesc+'</p>';
+            (function(n,l){card.addEventListener('click',function(){openProjectModal(n,l)})})(d.name||'',d.link||'');
+            grid.appendChild(card);
 
-            if (editModeId && !imageUrl && editOldIsIcon) {
-                projData.isIcon = true;
-                projData.iconClass = editOldIconClass;
-            } else {
-                projData.isIcon = false;
-                projData.iconClass = "";
-            }
+            var ai=document.createElement('div');ai.className='adm-pi';
+            ai.innerHTML='<div class="adm-pi-info"><strong>'+safeName+'</strong><small>'+safeDesc+'</small></div>'+
+                '<div class="adm-pi-acts"><button class="eb"><i class="fas fa-edit"></i></button><button class="db"><i class="fas fa-trash"></i></button></div>';
+            (function(pid,pd){
+                ai.querySelector('.eb').addEventListener('click',function(){
+                    setupEdit(pid,pd.name||'',pd.desc||'',pd.link||'',pd.imageUrl||'',pd.isIcon||false,pd.iconClass||'');
+                });
+                ai.querySelector('.db').addEventListener('click',function(){deleteProject(pid)});
+            })(id,d);
+            list.appendChild(ai);
+        });
 
-            if (editModeId) {
-                db.collection("projects").doc(editModeId).update(projData)
-                    .then(function() {
-                        showToast("Project updated successfully!", "success");
-                        resetForm();
-                    })
-                    .catch(function(e) { showToast("Update Error: " + e.message, "error"); });
-            } else {
-                db.collection("projects").add(projData)
-                    .then(function() {
-                        showToast("Project added successfully!", "success");
-                        resetForm();
-                    })
-                    .catch(function(e) { showToast("Add Error: " + e.message, "error"); });
-            }
+        if(document.getElementById('sec-projects').classList.contains('active')){
+            grid.classList.remove('stagger');void grid.offsetWidth;grid.classList.add('stagger');
         }
+    });
+}
+function saveProject(){
+    var name=document.getElementById('adm-p-name').value.trim();
+    var desc=document.getElementById('adm-p-desc').value.trim();
+    var link=document.getElementById('adm-p-link').value.trim();
+    var img=document.getElementById('adm-p-img').value.trim();
+    if(!name||!link){showToast('Project Name \u098F\u09AC\u0982 Link \u0985\u09AC\u09B6\u09CD\u09AF\u0987 \u09A6\u09BF\u09A4\u09C7 \u09B9\u09AC\u09C7!','error');return}
+    var projData={name:name,desc:desc,link:link,imageUrl:img};
+    if(editModeId&&!img&&editOldIsIcon){projData.isIcon=true;projData.iconClass=editOldIconClass}
+    else{projData.isIcon=false;projData.iconClass=''}
+    if(editModeId){
+        db.collection('projects').doc(editModeId).update(projData)
+            .then(function(){showToast('Project updated!','success');resetProjForm()})
+            .catch(function(e){showToast('Error: '+e.message,'error')});
+    }else{
+        db.collection('projects').add(projData)
+            .then(function(){showToast('Project added!','success');resetProjForm()})
+            .catch(function(e){showToast('Error: '+e.message,'error')});
+    }
+}
+function setupEdit(id,name,desc,link,img,isIcon,iconClass){
+    document.getElementById('adm-p-name').value=name;
+    document.getElementById('adm-p-desc').value=desc;
+    document.getElementById('adm-p-link').value=link;
+    document.getElementById('adm-p-img').value=img;
+    editModeId=id;editOldIsIcon=isIcon;editOldIconClass=iconClass;
+    document.getElementById('proj-form-title').textContent='Edit Project';
+    document.getElementById('save-btn-text').textContent='Update Project';
+    document.getElementById('adm-panel').scrollTo({top:0,behavior:'smooth'});
+}
+function deleteProject(id){
+    showConfirmDialog(
+        '\u0986\u09AA\u09A8\u09BF \u0995\u09BF \u09A8\u09BF\u09B6\u09CD\u099A\u09BF\u09A4 \u09AF\u09C7 \u098F\u0987 \u09AA\u09CD\u09B0\u09CB\u099C\u09C7\u0995\u09CD\u099F\u099F\u09BF \u09AE\u09C1\u099B\u09C7 \u09AB\u09C7\u09B2\u09A4\u09C7 \u099A\u09BE\u09A8?',
+        function(){
+            db.collection('projects').doc(id).delete()
+                .then(function(){showToast('Project deleted!','success')})
+                .catch(function(e){showToast('Error: '+e.message,'error')});
+        },true
+    );
+}
 
-        function setupEdit(id, name, desc, link, img, isIcon, iconClass) {
-            document.getElementById('admin-name').value = name;
-            document.getElementById('admin-desc').value = desc;
-            document.getElementById('admin-link').value = link;
-            document.getElementById('admin-img').value = (img && img !== 'undefined') ? img : '';
-            editModeId = id;
-            editOldIsIcon = isIcon;
-            editOldIconClass = iconClass;
-            document.getElementById('admin-submit-btn').innerHTML = '<i class="fas fa-save" style="margin-right:6px;"></i> Update Project';
-        }
-
-        function deleteProject(id) {
-            showConfirmDialog("আপনি কি নিশ্চিত যে এই প্রোজেক্টটি মুছে ফেলতে চান?", function() {
-                db.collection("projects").doc(id).delete()
-                    .then(function() {
-                        showToast("Project deleted!", "success");
-                    })
-                    .catch(function(e) {
-                        showToast("Delete Error: " + e.message, "error");
-                    });
-            });
-        }
-
-        async function loadProfileConfig() {
-            const profileRef = db.collection("config").doc("profile");
-            const doc = await profileRef.get();
-            if (doc.exists) {
-                const data = doc.data();
-                document.getElementById('admin-profile-name').value = data.name || 'ADNAN RDX';
-                document.getElementById('admin-profile-img').value = data.imageUrl || 'https://i.ibb.co/Cpx8YJr/IMG-20260227-161602-397.jpg';
-            }
-        }
-
-        async function saveProfileConfig() {
-            var name = document.getElementById('admin-profile-name').value.trim();
-            var img = document.getElementById('admin-profile-img').value.trim();
-            if (!name || !img) {
-                showToast("Name and Image URL required!", "error");
-                return;
-            }
-            const profileRef = db.collection("config").doc("profile");
-            await profileRef.set({ name, imageUrl: img });
-            showToast("Profile updated!", "success");
-            updateProfileUI(name, img);
-        }
-
-        function updateProfileUI(name, img) {
-            document.getElementById('profile-name').textContent = name + ' ';
-            const badge = document.createElement('span');
-            badge.className = 'inline-badge';
-            badge.innerHTML = '<i class="fas fa-check" style="font-size:10px;"></i>';
-            document.getElementById('profile-name').appendChild(badge);
-            document.getElementById('profile-img-element').src = img;
-        }
-
-        async function saveAdminCredentials() {
-            var newEmail = document.getElementById('admin-new-email').value.trim();
-            var newPass = document.getElementById('admin-new-pass').value.trim();
-            if (!newEmail || !newPass) {
-                showToast("New Email and Password required!", "error");
-                return;
-            }
-            const configRef = db.collection("config").doc("admin");
-            await configRef.set({ email: newEmail, password: newPass });
-            showToast("Credentials updated! Login again.", "success");
-            closeAdminPanel();
-        }
-
-        /* ======================================================
-           INIT
-        ====================================================== */
-        window.onload = async function() {
-            await initDefaultConfig();
-            const profileRef = db.collection("config").doc("profile");
-            const profileDoc = await profileRef.get();
-            if (profileDoc.exists) {
-                const data = profileDoc.data();
-                updateProfileUI(data.name, data.imageUrl);
-            }
-            initDefaultProjects();
-        };
-    </script>
+/* ================================================================
+   INIT
+================================================================ */
+window.onload=function(){initDefaultProjects();initSettings()};
+</script>
 </body>
 </html>
