@@ -6,13 +6,14 @@
     <title>ADNAN DEV PROJECT LIST</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
     <style>
         :root {
-            --primary-color: #00D4FF;
-            --primary-glow: rgba(0, 212, 255, 0.5);
-            --primary-deep: #00A8CC;
+            --primary-green: #4CAF50;
+            --green-glow: rgba(76, 175, 80, 0.5);
+            --green-deep: #388E3C;
             --white: #FFFFFF;
             --bg-soft: #0A0A0F;
             --bg-card: rgba(255,255,255,0.04);
@@ -22,7 +23,7 @@
             --glass-border: rgba(255,255,255,0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', 'Hind Siliguri', sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
             background: var(--bg-soft);
@@ -49,7 +50,7 @@
 
         .header-live-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(0,212,255,0.12) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(76,175,80,0.12) 0%, transparent 100%);
             z-index: 0;
         }
 
@@ -57,14 +58,14 @@
             content: '';
             position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(0,212,255,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(0,212,255,0.06) 0%, transparent 50%);
-            animation: headerPulse 8s ease-in-out infinite;
+            background: radial-gradient(circle at 30% 40%, rgba(76,175,80,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(76,175,80,0.06) 0%, transparent 50%);
+            animation: headerPulse 6s ease-in-out infinite; /* Changed duration */
         }
 
         @keyframes headerPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
-            50% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+            50% { transform: scale(1.05) rotate(3deg); opacity: 0.9; } /* Slight change */
         }
 
         /* ========== PROFILE ========== */
@@ -81,7 +82,7 @@
             border-radius: 50%;
             border: 3px solid transparent;
             border-image: none;
-            animation: profileRingSpin 3s linear infinite;
+            animation: profileRingSpin 4s linear infinite; /* Changed duration */
         }
 
         .profile-ring::before {
@@ -89,10 +90,10 @@
             position: absolute; top: -3px; left: -3px;
             width: calc(100% + 6px); height: calc(100% + 6px);
             border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--primary-color), #7AFFFF, #00D4FF, #00FFAA, var(--primary-color));
+            background: conic-gradient(from 0deg, var(--primary-green), #81C784, #4CAF50, #AED581, var(--primary-green));
             -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
             mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
-            animation: profileRingSpin 3s linear infinite;
+            animation: profileRingSpin 4s linear infinite; /* Changed duration */
         }
 
         @keyframes profileRingSpin {
@@ -103,14 +104,14 @@
             position: absolute; top: -20px; left: -20px;
             width: calc(100% + 40px); height: calc(100% + 40px);
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,212,255,0.3) 0%, transparent 70%);
-            animation: profileGlowPulse 2s ease-in-out infinite;
+            background: radial-gradient(circle, rgba(76,175,80,0.3) 0%, transparent 70%);
+            animation: profileGlowPulse 2.5s ease-in-out infinite; /* Changed duration */
             z-index: -1;
         }
 
         @keyframes profileGlowPulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.15); opacity: 0.9; }
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.8; } /* Slight change */
         }
 
         .profile-img {
@@ -133,9 +134,9 @@
             width: calc(100% + 8px); height: calc(100% + 8px);
             border-radius: 50%;
             border: 2px solid transparent;
-            border-top-color: #007AFF;
-            border-right-color: #34AADC;
-            animation: badgeSpin 1.5s linear infinite;
+            border-top-color: #FF3B30;
+            border-right-color: #FF6B6B;
+            animation: badgeSpin 2s linear infinite; /* Changed duration */
         }
 
         @keyframes badgeSpin {
@@ -143,19 +144,19 @@
         }
 
         .verified-badge {
-            background: linear-gradient(135deg, #007AFF, #34AADC);
+            background: linear-gradient(135deg, #FF3B30, #FF6B6B);
             border-radius: 50%;
             color: white;
             font-size: 14px;
             width: 24px; height: 24px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 10px rgba(0,122,255,0.6);
-            animation: badgePulse 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255,59,48,0.6);
+            animation: badgePulse 2.5s ease-in-out infinite; /* Changed duration */
         }
 
         @keyframes badgePulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(0,122,255,0.4); }
-            50% { box-shadow: 0 0 20px rgba(0,122,255,0.8), 0 0 40px rgba(0,122,255,0.3); }
+            0%, 100% { box-shadow: 0 0 10px rgba(255,59,48,0.4); }
+            50% { box-shadow: 0 0 20px rgba(255,59,48,0.8), 0 0 40px rgba(255,59,48,0.3); }
         }
 
         /* ========== NAME & SUBTITLE ========== */
@@ -171,12 +172,12 @@
             letter-spacing: 2px;
             display: inline-flex;
             align-items: center; gap: 8px;
-            text-shadow: 0 0 30px rgba(0,212,255,0.3);
+            text-shadow: 0 0 30px rgba(76,175,80,0.3);
         }
 
         .name-container h1 .inline-badge {
             width: 22px; height: 22px;
-            background: linear-gradient(135deg, #007AFF, #34AADC);
+            background: linear-gradient(135deg, #FF3B30, #FF6B6B);
             border-radius: 50%;
             display: inline-flex; align-items: center; justify-content: center;
             font-size: 11px; color: white;
@@ -193,7 +194,7 @@
         }
 
         .tagline {
-            color: var(--primary-color);
+            color: var(--primary-green);
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 3px;
@@ -207,7 +208,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== SOCIAL BUTTONS ========== */
+        /* ========== SOCIAL BUTTONS (TELEGRAM + DEVELOPER) ========== */
         .social-buttons {
             display: flex; gap: 12px;
             justify-content: center;
@@ -234,7 +235,7 @@
             position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
             background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.15), transparent, transparent);
-            animation: socialBtnSweep 3s linear infinite;
+            animation: socialBtnSweep 4s linear infinite; /* Changed duration */
         }
 
         @keyframes socialBtnSweep {
@@ -242,14 +243,14 @@
         }
 
         .social-btn-telegram {
-            background: linear-gradient(135deg, var(--primary-color), #7AFFFF);
+            background: linear-gradient(135deg, var(--primary-green), #81C784);
             color: white;
-            box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+            box-shadow: 0 4px 20px rgba(76,175,80,0.4);
         }
 
         .social-btn-telegram:active {
             transform: scale(0.95);
-            box-shadow: 0 2px 10px rgba(0,212,255,0.6);
+            box-shadow: 0 2px 10px rgba(76,175,80,0.6);
         }
 
         .social-btn-dev {
@@ -282,8 +283,8 @@
         .stat-number {
             font-family: 'Orbitron', sans-serif;
             font-size: 22px; font-weight: 900;
-            color: var(--primary-color);
-            text-shadow: 0 0 20px rgba(0,212,255,0.3);
+            color: var(--primary-green);
+            text-shadow: 0 0 20px rgba(76,175,80,0.3);
         }
 
         .stat-label {
@@ -312,10 +313,10 @@
             content: '';
             display: block;
             width: 40px; height: 3px;
-            background: var(--primary-color);
+            background: var(--primary-green);
             margin: 8px auto 0;
             border-radius: 2px;
-            box-shadow: 0 0 10px var(--primary-glow);
+            box-shadow: 0 0 10px var(--green-glow);
         }
 
         /* ========== CONTAINER ========== */
@@ -348,8 +349,8 @@
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
             border-radius: 22px;
-            background: conic-gradient(from var(--card-angle, 0deg), var(--primary-color), #7AFFFF, transparent, transparent, transparent, var(--primary-color));
-            animation: cardBorderRoll 4s linear infinite;
+            background: conic-gradient(from var(--card-angle, 0deg), var(--primary-green), #81C784, transparent, transparent, transparent, var(--primary-green));
+            animation: cardBorderRoll 5s linear infinite; /* Changed duration */
             opacity: 0.5;
             transition: opacity 0.3s ease;
         }
@@ -385,7 +386,7 @@
             content: '';
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 0%, rgba(76,175,80,0.06) 0%, transparent 70%);
             transition: opacity 0.3s;
         }
 
@@ -401,7 +402,7 @@
             position: absolute; top: 0; left: -100%;
             width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
-            animation: cardShimmer 3s ease-in-out infinite;
+            animation: cardShimmer 4s ease-in-out infinite; /* Changed duration */
         }
 
         @keyframes cardShimmer {
@@ -418,8 +419,8 @@
         .icon-box {
             width: 70px; height: 70px;
             margin: 0 auto 12px;
-            background: rgba(0,212,255,0.08);
-            border: 1px solid rgba(0,212,255,0.15);
+            background: rgba(76,175,80,0.08);
+            border: 1px solid rgba(76,175,80,0.15);
             border-radius: 50%;
             display: flex;
             align-items: center; justify-content: center;
@@ -431,10 +432,10 @@
 
         .card:active .icon-box {
             transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(0,212,255,0.3);
+            box-shadow: 0 0 25px rgba(76,175,80,0.3);
         }
 
-        .icon-box i { font-size: 28px; color: var(--primary-color); }
+        .icon-box i { font-size: 28px; color: var(--primary-green); }
         .icon-box img { width: 60%; height: 60%; object-fit: contain; }
 
         .card h3 {
@@ -457,7 +458,7 @@
             background: #4CD964;
             border-radius: 50%;
             z-index: 2;
-            animation: pulseDot 2s ease-in-out infinite;
+            animation: pulseDot 2.5s ease-in-out infinite; /* Changed duration */
         }
 
         @keyframes pulseDot {
@@ -480,8 +481,8 @@
         }
 
         .footer-banner .heart {
-            color: var(--primary-color);
-            animation: heartBeat 1.5s ease-in-out infinite;
+            color: var(--primary-green);
+            animation: heartBeat 2s ease-in-out infinite; /* Changed duration */
             display: inline-block;
         }
 
@@ -505,14 +506,14 @@
 
         .marquee-content {
             display: flex; gap: 50px;
-            animation: marqueeScroll 15s linear infinite;
+            animation: marqueeScroll 20s linear infinite; /* Changed duration */
             width: max-content;
         }
 
         .marquee-content span {
             font-family: 'Orbitron', sans-serif;
             font-size: 11px;
-            color: rgba(0,212,255,0.4);
+            color: rgba(76,175,80,0.4);
             letter-spacing: 3px;
             text-transform: uppercase;
             white-space: nowrap;
@@ -542,10 +543,10 @@
 
         .modal-content {
             background: linear-gradient(145deg, #1A1A2E, #16162A);
-            border: 1px solid rgba(0,212,255,0.2);
+            border: 1px solid rgba(76,175,80,0.2);
             padding: 30px 20px; border-radius: 24px;
             width: 85%; max-width: 340px; text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(76,175,80,0.1);
             animation: modalContentSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -554,7 +555,7 @@
         .modal-content::before {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 0%, rgba(76,175,80,0.06) 0%, transparent 60%);
             pointer-events: none;
         }
 
@@ -595,9 +596,9 @@
         }
 
         .btn-start {
-            background: linear-gradient(135deg, var(--primary-color), #7AFFFF);
+            background: linear-gradient(135deg, var(--primary-green), #81C784);
             color: white;
-            box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+            box-shadow: 0 4px 20px rgba(76,175,80,0.4);
         }
 
         .btn-start::before {
@@ -624,11 +625,11 @@
 
         .viewer-header {
             padding: 15px 20px;
-            background: linear-gradient(135deg, var(--primary-color), #00A8CC);
+            background: linear-gradient(135deg, var(--primary-green), #388E3C);
             color: white;
             display: flex; align-items: center; gap: 12px;
             font-weight: 600; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+            box-shadow: 0 4px 20px rgba(76,175,80,0.3);
         }
 
         .viewer-header:active { opacity: 0.85; }
@@ -639,10 +640,10 @@
         #admin-access-btn {
             position: fixed; bottom: 20px; right: 20px;
             background: linear-gradient(135deg, #1A1A2E, #2A2A4A);
-            color: white; border: 1px solid rgba(0,212,255,0.3);
+            color: white; border: 1px solid rgba(76,175,80,0.3);
             padding: 12px 22px; border-radius: 50px;
             font-weight: 600; cursor: pointer; z-index: 2000;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.4), 0 0 15px rgba(0,212,255,0.15);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.4), 0 0 15px rgba(76,175,80,0.15);
             display: flex; align-items: center; gap: 8px;
             transition: all 0.3s ease;
             font-size: 13px;
@@ -655,7 +656,7 @@
         }
 
         #admin-access-btn:active { transform: scale(0.95); }
-        #admin-access-btn i { color: var(--primary-color); }
+        #admin-access-btn i { color: var(--primary-green); }
 
         /* ========== ADMIN PANEL ========== */
         .admin-form-group { margin-bottom: 14px; text-align: left; position: relative; z-index: 1; }
@@ -680,17 +681,17 @@
 
         .admin-form-group input::placeholder { color: rgba(255,255,255,0.25); }
         .admin-form-group input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 15px rgba(0,212,255,0.15);
+            border-color: var(--primary-green);
+            box-shadow: 0 0 15px rgba(76,175,80,0.15);
         }
 
         .btn-admin-submit {
-            background: linear-gradient(135deg, var(--primary-color), #7AFFFF);
+            background: linear-gradient(135deg, var(--primary-green), #81C784);
             color: white; border: none;
             padding: 13px; width: 100%; border-radius: 12px;
             font-weight: 700; cursor: pointer; font-size: 14px;
             margin-top: 10px;
-            box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+            box-shadow: 0 4px 20px rgba(76,175,80,0.3);
             transition: all 0.3s ease;
             position: relative; z-index: 1;
         }
@@ -701,7 +702,7 @@
             margin-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.08);
             padding-top: 15px;
-            max-height: 280px;
+            max-height: 250px;
             overflow-y: auto;
             text-align: left;
             position: relative; z-index: 1;
@@ -709,7 +710,7 @@
 
         .project-list-admin::-webkit-scrollbar { width: 4px; }
         .project-list-admin::-webkit-scrollbar-track { background: transparent; }
-        .project-list-admin::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); border-radius: 4px; }
+        .project-list-admin::-webkit-scrollbar-thumb { background: rgba(76,175,80,0.3); border-radius: 4px; }
 
         .admin-proj-item {
             display: flex; justify-content: space-between; align-items: center;
@@ -731,8 +732,8 @@
         }
 
         .admin-proj-actions button:active { transform: scale(0.9); }
-        .btn-edit { background: linear-gradient(135deg, #007AFF, #34AADC); }
-        .btn-delete { background: linear-gradient(135deg, var(--primary-color), #7AFFFF); }
+        .btn-edit { background: linear-gradient(135deg, var(--primary-green), #81C784); }
+        .btn-delete { background: linear-gradient(135deg, #FF3B30, #FF6B6B); }
 
         .admin-close-btn {
             position: absolute; right: 18px; top: 18px;
@@ -747,7 +748,7 @@
             z-index: 5;
         }
 
-        .admin-close-btn:active { transform: scale(0.9); background: rgba(0,212,255,0.2); }
+        .admin-close-btn:active { transform: scale(0.9); background: rgba(76,175,80,0.2); }
 
         .admin-panel-title {
             font-family: 'Orbitron', sans-serif;
@@ -757,14 +758,7 @@
             position: relative; z-index: 1;
         }
 
-        .admin-panel-title i { color: var(--primary-color); margin-right: 8px; }
-
-        /* ========== ADMIN MODAL SCROLL FIX ========== */
-        #admin-panel-modal .modal-content {
-            max-height: 92vh;
-            overflow-y: auto;
-            padding-bottom: 40px;
-        }
+        .admin-panel-title i { color: var(--primary-green); margin-right: 8px; }
 
         /* ========== CUSTOM TOAST ========== */
         .toast-container {
@@ -776,7 +770,7 @@
 
         .toast {
             background: linear-gradient(135deg, #1A1A2E, #2A2A4A);
-            border: 1px solid rgba(0,212,255,0.3);
+            border: 1px solid rgba(76,175,80,0.3);
             color: #FFF;
             padding: 14px 24px;
             border-radius: 14px;
@@ -786,7 +780,7 @@
             pointer-events: auto;
         }
 
-        .toast.error { border-color: var(--primary-color); }
+        .toast.error { border-color: #FF3B30; }
         .toast.success { border-color: #4CD964; }
 
         @keyframes toastIn {
@@ -812,7 +806,7 @@
 
         .confirm-dialog {
             background: linear-gradient(145deg, #1A1A2E, #16162A);
-            border: 1px solid rgba(0,212,255,0.2);
+            border: 1px solid rgba(76,175,80,0.2);
             border-radius: 20px;
             padding: 28px 22px;
             width: 85%; max-width: 320px;
@@ -885,7 +879,7 @@
         <div class="profile-wrapper">
             <div class="profile-glow"></div>
             <div class="profile-ring"></div>
-            <img src="https://i.ibb.co.com/Cpx8YJrY/IMG-20260227-161602-397.jpg" alt="ADNAN RDX" class="profile-img">
+            <img id="profile-img-element" src="https://i.ibb.co/Cpx8YJr/IMG-20260227-161602-397.jpg" alt="ADNAN RDX" class="profile-img">
             <div class="verified-container">
                 <div class="verified-spin-ring"></div>
                 <div class="verified-badge"><i class="fas fa-check" style="font-size:11px;"></i></div>
@@ -893,7 +887,7 @@
         </div>
 
         <div class="name-container">
-            <h1>ADNAN RDX <span class="inline-badge"><i class="fas fa-check" style="font-size:10px;"></i></span></h1>
+            <h1 id="profile-name">ADNAN RDX <span class="inline-badge"><i class="fas fa-check" style="font-size:10px;"></i></span></h1>
         </div>
         <p class="sub-title">ADNAN DEV PROJECT LIST</p>
         <p class="tagline">&#9889; Building the future, one project at a time</p>
@@ -1004,7 +998,7 @@
     </div>
 
     <div class="modal-overlay" id="admin-panel-modal" style="align-items: flex-start; padding-top: 30px;">
-        <div class="modal-content" style="max-width: 460px; width: 92%;">
+        <div class="modal-content" style="max-width: 460px; width: 92%; padding-bottom: 20px; max-height: 90vh; overflow-y: auto;">
             <button class="admin-close-btn" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
             <div class="admin-panel-title"><i class="fas fa-terminal"></i> Dashboard</div>
             <div class="admin-form-group">
@@ -1026,27 +1020,28 @@
             <button class="btn-admin-submit" id="admin-submit-btn" onclick="saveProject()">
                 <i class="fas fa-plus-circle" style="margin-right:6px;"></i> Add Project
             </button>
-
-            <!-- NEW SETTINGS SECTION -->
-            <div style="margin-top: 35px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.08);">
-                <div class="admin-panel-title" style="font-size: 16px; margin-bottom: 15px;"><i class="fas fa-cog"></i> Profile &amp; Admin Credentials</div>
-                <div class="admin-form-group">
-                    <label>Profile Image URL (ImgBB)</label>
-                    <input type="text" id="admin-profile-img" placeholder="https://i.ibb.co/...">
-                </div>
-                <div class="admin-form-group">
-                    <label>New Admin Email</label>
-                    <input type="email" id="new-admin-email" placeholder="xyz@gmail.com">
-                </div>
-                <div class="admin-form-group">
-                    <label>New Admin Password</label>
-                    <input type="password" id="new-admin-pass" placeholder="Enter new password">
-                </div>
-                <button class="btn-admin-submit" onclick="updateSettings()">
-                    <i class="fas fa-save" style="margin-right:6px;"></i> Update Profile &amp; Credentials
-                </button>
+            <div class="admin-form-group" style="margin-top: 20px;">
+                <label>Profile Name</label>
+                <input type="text" id="admin-profile-name" placeholder="e.g. ADNAN RDX">
             </div>
-
+            <div class="admin-form-group">
+                <label>Profile Image URL</label>
+                <input type="text" id="admin-profile-img" placeholder="https://i.ibb.co/...">
+            </div>
+            <button class="btn-admin-submit" onclick="saveProfileConfig()">
+                <i class="fas fa-save" style="margin-right:6px;"></i> Save Profile
+            </button>
+            <div class="admin-form-group" style="margin-top: 20px;">
+                <label>New Admin Email</label>
+                <input type="email" id="admin-new-email" placeholder="New email">
+            </div>
+            <div class="admin-form-group">
+                <label>New Admin Password</label>
+                <input type="password" id="admin-new-pass" placeholder="New password">
+            </div>
+            <button class="btn-admin-submit" onclick="saveAdminCredentials()">
+                <i class="fas fa-key" style="margin-right:6px;"></i> Update Credentials
+            </button>
             <div class="project-list-admin" id="admin-list-container"></div>
         </div>
     </div>
@@ -1056,7 +1051,7 @@
         <div class="viewer-header" onclick="closeApp()">
             <i class="fas fa-chevron-left"></i> <span>Back to Home</span>
         </div>
-        <iframe src="" id="app-frame" allow="camera; microphone; clipboard-read; clipboard-write;"></iframe>
+        <iframe id="app-frame" allow="camera; microphone; clipboard-read; clipboard-write;"></iframe>
     </div>
 
     <script>
@@ -1103,10 +1098,11 @@
 
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 212, 255, ' + p.alpha + ')';
+                    ctx.fillStyle = 'rgba(76, 175, 80, ' + p.alpha + ')';
                     ctx.fill();
                 });
 
+                // draw connections
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
@@ -1116,7 +1112,7 @@
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = 'rgba(0, 212, 255, ' + (0.08 * (1 - dist / 120)) + ')';
+                            ctx.strokeStyle = 'rgba(76, 175, 80, ' + (0.08 * (1 - dist / 120)) + ')';
                             ctx.lineWidth = 0.5;
                             ctx.stroke();
                         }
@@ -1127,6 +1123,9 @@
             animate();
         })();
 
+        /* ======================================================
+           CUSTOM TOAST (replaces alert)
+        ====================================================== */
         function showToast(message, type) {
             type = type || 'error';
             const container = document.getElementById('toast-container');
@@ -1139,6 +1138,9 @@
             }, 3000);
         }
 
+        /* ======================================================
+           CUSTOM CONFIRM DIALOG (replaces confirm)
+        ====================================================== */
         function showConfirmDialog(message, onConfirm) {
             const overlay = document.createElement('div');
             overlay.className = 'confirm-dialog-overlay';
@@ -1197,7 +1199,15 @@
 
         document.getElementById('confirm-btn').onclick = function() {
             closeModal();
-            document.getElementById('app-frame').src = targetUrl;
+            const frame = document.getElementById('app-frame');
+            frame.src = targetUrl;
+            frame.onload = () => {
+                // Success
+            };
+            frame.onerror = () => {
+                showToast("প্রজেক্ট লোড হয়নি, লিঙ্ক চেক করুন বা পরে চেষ্টা করুন।", "error");
+                closeApp();
+            };
             var viewer = document.getElementById('app-viewer');
             viewer.style.display = 'flex';
             viewer.classList.add('active');
@@ -1213,11 +1223,8 @@
         }
 
         /* ======================================================
-           ADMIN LOGIN (dynamic)
+           ADMIN LOGIN
         ====================================================== */
-        window.currentAdminEmail = "xyz@gmail.com";
-        window.currentAdminPassword = "marufbhai";
-
         function openAdminLogin() {
             var modal = document.getElementById('admin-login-modal');
             modal.style.display = 'flex';
@@ -1232,15 +1239,20 @@
             document.getElementById('admin-pass').value = "";
         }
 
-        function handleLogin() {
+        async function handleLogin() {
             var email = document.getElementById('admin-email').value;
             var pass = document.getElementById('admin-pass').value;
-            if (email === window.currentAdminEmail && pass === window.currentAdminPassword) {
-                closeAdminLogin();
-                openAdminPanel();
-            } else {
-                showToast("ভুল ইমেইল অথবা পাসওয়ার্ড!", "error");
+            const configRef = db.collection("config").doc("admin");
+            const doc = await configRef.get();
+            if (doc.exists) {
+                const data = doc.data();
+                if (email === data.email && pass === data.password) {
+                    closeAdminLogin();
+                    openAdminPanel();
+                    return;
+                }
             }
+            showToast("ভুল ইমেইল অথবা পাসওয়ার্ড!", "error");
         }
 
         /* ======================================================
@@ -1250,14 +1262,11 @@
         var editOldIsIcon = false;
         var editOldIconClass = "";
 
-        const SETTINGS_ID = "appSettings";
-
         function openAdminPanel() {
             var modal = document.getElementById('admin-panel-modal');
             modal.style.display = 'flex';
             modal.classList.add('active');
-            resetForm();
-            loadAdminFormValues();
+            loadProfileConfig();
         }
 
         function closeAdminPanel() {
@@ -1276,70 +1285,8 @@
             document.getElementById('admin-submit-btn').innerHTML = '<i class="fas fa-plus-circle" style="margin-right:6px;"></i> Add Project';
         }
 
-        function loadAdminFormValues() {
-            db.collection("settings").doc(SETTINGS_ID).get().then((doc) => {
-                if (doc.exists) {
-                    const d = doc.data();
-                    document.getElementById('admin-profile-img').value = d.profileImageUrl || '';
-                    document.getElementById('new-admin-email').value = d.adminEmail || '';
-                    document.getElementById('new-admin-pass').value = '';
-                }
-            });
-        }
-
-        function initSettings() {
-            db.collection("settings").doc(SETTINGS_ID).get().then((doc) => {
-                if (!doc.exists) {
-                    db.collection("settings").doc(SETTINGS_ID).set({
-                        profileImageUrl: "https://i.ibb.co.com/Cpx8YJrY/IMG-20260227-161602-397.jpg",
-                        adminEmail: "xyz@gmail.com",
-                        adminPassword: "marufbhai"
-                    });
-                }
-                loadSettings();
-            }).catch(console.error);
-        }
-
-        function loadSettings() {
-            db.collection("settings").doc(SETTINGS_ID).get().then((doc) => {
-                if (doc.exists) {
-                    const data = doc.data();
-                    if (data.profileImageUrl) {
-                        document.querySelector('.profile-img').src = data.profileImageUrl;
-                    }
-                    window.currentAdminEmail = data.adminEmail || "xyz@gmail.com";
-                    window.currentAdminPassword = data.adminPassword || "marufbhai";
-                }
-            }).catch(console.error);
-        }
-
-        function updateSettings() {
-            const profileImg = document.getElementById('admin-profile-img').value.trim();
-            const newEmail = document.getElementById('new-admin-email').value.trim();
-            const newPass = document.getElementById('new-admin-pass').value.trim();
-
-            let updateData = {};
-            if (profileImg) updateData.profileImageUrl = profileImg;
-            if (newEmail) updateData.adminEmail = newEmail;
-            if (newPass) updateData.adminPassword = newPass;
-
-            if (Object.keys(updateData).length === 0) {
-                showToast("কোনো পরিবর্তন পাওয়া যায়নি!", "error");
-                return;
-            }
-
-            db.collection("settings").doc(SETTINGS_ID).update(updateData)
-                .then(() => {
-                    showToast("Profile & Credentials updated successfully!", "success");
-                    if (updateData.profileImageUrl) document.querySelector('.profile-img').src = updateData.profileImageUrl;
-                    if (updateData.adminEmail) window.currentAdminEmail = updateData.adminEmail;
-                    if (updateData.adminPassword) window.currentAdminPassword = updateData.adminPassword;
-                })
-                .catch((e) => showToast("Update Error: " + e.message, "error"));
-        }
-
         /* ======================================================
-           FIREBASE PROJECTS (Edit + Delete + List সব আছে)
+           FIREBASE CRUD
         ====================================================== */
         function escapeHtml(str) {
             if (!str) return '';
@@ -1362,6 +1309,19 @@
                 fetchProjects();
             } catch (error) {
                 console.error("Firestore Init Error:", JSON.stringify(error));
+            }
+        }
+
+        async function initDefaultConfig() {
+            const configRef = db.collection("config").doc("admin");
+            const doc = await configRef.get();
+            if (!doc.exists) {
+                await configRef.set({ email: 'xyz@gmail.com', password: 'marufbhai' });
+            }
+            const profileRef = db.collection("config").doc("profile");
+            const profileDoc = await profileRef.get();
+            if (!profileDoc.exists) {
+                await profileRef.set({ name: 'ADNAN RDX', imageUrl: 'https://i.ibb.co/Cpx8YJr/IMG-20260227-161602-397.jpg' });
             }
         }
 
@@ -1412,7 +1372,7 @@
                         '</div>';
                     mainGrid.appendChild(wrapper);
 
-                    // ADMIN LIST WITH EDIT + DELETE
+                    // Admin list
                     var adminItem = document.createElement('div');
                     adminItem.className = 'admin-proj-item';
                     adminItem.innerHTML =
@@ -1421,20 +1381,38 @@
                             '<small>' + safeDesc + '</small>' +
                         '</div>' +
                         '<div class="admin-proj-actions">' +
-                            '<button class="btn-edit"><i class="fas fa-edit"></i></button>' +
-                            '<button class="btn-delete"><i class="fas fa-trash"></i></button>' +
+                            '<button class="btn-edit" data-id="' + id + '"><i class="fas fa-edit"></i></button>' +
+                            '<button class="btn-delete" data-id="' + id + '"><i class="fas fa-trash"></i></button>' +
                         '</div>';
 
-                    adminItem.querySelector('.btn-edit').addEventListener('click', function() {
-                        setupEdit(id, data.name || '', data.desc || '', data.link || '', data.imageUrl || '', data.isIcon || false, data.iconClass || '');
-                    });
+                    // Attach event listeners properly
+                    var editBtn = adminItem.querySelector('.btn-edit');
+                    var deleteBtn = adminItem.querySelector('.btn-delete');
 
-                    adminItem.querySelector('.btn-delete').addEventListener('click', function() {
-                        deleteProject(id);
-                    });
+                    editBtn.addEventListener('click', (function(capturedId, capturedData) {
+                        return function() {
+                            setupEdit(
+                                capturedId,
+                                capturedData.name || '',
+                                capturedData.desc || '',
+                                capturedData.link || '',
+                                capturedData.imageUrl || '',
+                                capturedData.isIcon || false,
+                                capturedData.iconClass || ''
+                            );
+                        };
+                    })(id, data));
+
+                    deleteBtn.addEventListener('click', (function(capturedId) {
+                        return function() {
+                            deleteProject(capturedId);
+                        };
+                    })(id));
 
                     adminList.appendChild(adminItem);
                 });
+            }, function(error) {
+                console.error("Fetch Error:", JSON.stringify(error));
             });
         }
 
@@ -1461,18 +1439,18 @@
 
             if (editModeId) {
                 db.collection("projects").doc(editModeId).update(projData)
-                    .then(() => {
+                    .then(function() {
                         showToast("Project updated successfully!", "success");
                         resetForm();
                     })
-                    .catch(e => showToast("Update Error: " + e.message, "error"));
+                    .catch(function(e) { showToast("Update Error: " + e.message, "error"); });
             } else {
                 db.collection("projects").add(projData)
-                    .then(() => {
+                    .then(function() {
                         showToast("Project added successfully!", "success");
                         resetForm();
                     })
-                    .catch(e => showToast("Add Error: " + e.message, "error"));
+                    .catch(function(e) { showToast("Add Error: " + e.message, "error"); });
             }
         }
 
@@ -1480,7 +1458,7 @@
             document.getElementById('admin-name').value = name;
             document.getElementById('admin-desc').value = desc;
             document.getElementById('admin-link').value = link;
-            document.getElementById('admin-img').value = img || '';
+            document.getElementById('admin-img').value = (img && img !== 'undefined') ? img : '';
             editModeId = id;
             editOldIsIcon = isIcon;
             editOldIconClass = iconClass;
@@ -1490,17 +1468,72 @@
         function deleteProject(id) {
             showConfirmDialog("আপনি কি নিশ্চিত যে এই প্রোজেক্টটি মুছে ফেলতে চান?", function() {
                 db.collection("projects").doc(id).delete()
-                    .then(() => showToast("Project deleted!", "success"))
-                    .catch(e => showToast("Delete Error: " + e.message, "error"));
+                    .then(function() {
+                        showToast("Project deleted!", "success");
+                    })
+                    .catch(function(e) {
+                        showToast("Delete Error: " + e.message, "error");
+                    });
             });
+        }
+
+        async function loadProfileConfig() {
+            const profileRef = db.collection("config").doc("profile");
+            const doc = await profileRef.get();
+            if (doc.exists) {
+                const data = doc.data();
+                document.getElementById('admin-profile-name').value = data.name || 'ADNAN RDX';
+                document.getElementById('admin-profile-img').value = data.imageUrl || 'https://i.ibb.co/Cpx8YJr/IMG-20260227-161602-397.jpg';
+            }
+        }
+
+        async function saveProfileConfig() {
+            var name = document.getElementById('admin-profile-name').value.trim();
+            var img = document.getElementById('admin-profile-img').value.trim();
+            if (!name || !img) {
+                showToast("Name and Image URL required!", "error");
+                return;
+            }
+            const profileRef = db.collection("config").doc("profile");
+            await profileRef.set({ name, imageUrl: img });
+            showToast("Profile updated!", "success");
+            updateProfileUI(name, img);
+        }
+
+        function updateProfileUI(name, img) {
+            document.getElementById('profile-name').textContent = name + ' ';
+            const badge = document.createElement('span');
+            badge.className = 'inline-badge';
+            badge.innerHTML = '<i class="fas fa-check" style="font-size:10px;"></i>';
+            document.getElementById('profile-name').appendChild(badge);
+            document.getElementById('profile-img-element').src = img;
+        }
+
+        async function saveAdminCredentials() {
+            var newEmail = document.getElementById('admin-new-email').value.trim();
+            var newPass = document.getElementById('admin-new-pass').value.trim();
+            if (!newEmail || !newPass) {
+                showToast("New Email and Password required!", "error");
+                return;
+            }
+            const configRef = db.collection("config").doc("admin");
+            await configRef.set({ email: newEmail, password: newPass });
+            showToast("Credentials updated! Login again.", "success");
+            closeAdminPanel();
         }
 
         /* ======================================================
            INIT
         ====================================================== */
-        window.onload = function() {
+        window.onload = async function() {
+            await initDefaultConfig();
+            const profileRef = db.collection("config").doc("profile");
+            const profileDoc = await profileRef.get();
+            if (profileDoc.exists) {
+                const data = profileDoc.data();
+                updateProfileUI(data.name, data.imageUrl);
+            }
             initDefaultProjects();
-            initSettings();
         };
     </script>
 </body>
